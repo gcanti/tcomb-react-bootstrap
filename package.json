@@ -18,5 +18,9 @@
   "homepage": "https://github.com/gcanti/breact",
   "devDependencies": {
     "react-tools": "*"
-  }
+  },
+  "tags": [ 
+    "react",
+    "bootstrap"
+  ]
 }

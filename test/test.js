@@ -34,7 +34,7 @@ var data = [
 $(function () {
   
   // Grid system
-  append(<Col lg="12,0" md="6,6">col-lg-12</Col>, '<Col lg="12" md="6,6">col-lg-12</Col>');
+  append(<Col lg="12,0" md="6,6">col-lg-12 col-md-6 col-md-offset-6</Col>, '<Col lg="12" md="6,6">col-lg-12 col-md-6 col-md-offset-6</Col>');
 
   // Button
   append(<Button>Save</Button>, '<Button>Save</Button>');

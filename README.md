@@ -1,19 +1,19 @@
 # breact
 
-Bootstrap 3 components built with React
+Bootstrap 3 components built with React (work in progess)
 
 ## Components
 
 - Container
 - ContainerFluid
-- Col
 - Row
+- Col
 - Button
+- Select
+- Textbox
 - Table
-- Thead
-- Tbody
 - Panel
 - PanelHeading
 - PanelBody
-- Nav
-- NavItem
+- ProgessBar
+- Nav: Nav
