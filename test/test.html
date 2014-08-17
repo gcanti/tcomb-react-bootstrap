@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React Bootstrap IE8 test page</title>
+    <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <script src="../bower_components/react/react.js"></script>
+    <script src="../bower_components/react-bootstrap/react-bootstrap.js"></script>
+    <script>
+    function define(factory) {
+      var module = {};
+      factory(null, null, module);
+      window.ReactBootstrap.constants = module.exports;
+    }
+    </script>
+    <script src="../bower_components/react-bootstrap/constants.js"></script>
+    <script src="../node_modules/tcomb/build/tcomb.js"></script>
+    <script src="../index.js"></script>
+  </head>
+  <body>
+    <div id="fixture"></div>
+    <script>
+
+      var fixture = document.getElementById('fixture');
+
+      var Alert = TcombReactBootstrap.Alert;
+
+      var a = Alert({
+        bsStyle: "warning"
+      });
+
+      var message = [
+        React.DOM.strong(null, 'Holy guacamole!'),
+        ' Best check yo self, you\'re not looking too good.' 
+      ];
+
+      React.renderComponent(a.render(message), fixture);
+
+    </script>  
+</body>
+</html>
+
