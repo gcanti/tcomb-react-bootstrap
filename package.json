@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "watch": "jsx -w -x jsx --no-cache-dir test/jsx test/"
   },
   "repository": {
     "type": "git",

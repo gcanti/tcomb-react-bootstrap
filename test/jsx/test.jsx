@@ -1,11 +1,6 @@
-# tcomb-react-bootstrap
-
-tcomb bindings for rest-bootstrap
-
-## Example
-
-```javascript
 /** @jsx React.DOM */
+var mountNode = document.getElementById('fixture');
+
 var Alert = TcombReactBootstrap.Alert;
 
 // build a component with jsx..
@@ -25,4 +20,3 @@ component = Alert.Config({
 // ..but always type safe
 
 React.renderComponent(component, mountNode);
-```

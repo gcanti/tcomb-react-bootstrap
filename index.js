@@ -42,6 +42,17 @@
     }
   }
 
+  function bind(Config, Component) {
+    var f = function(config) {
+      config = Config(config);
+      var args = Array.prototype.slice.call(arguments, 1);
+      args = [config].concat(args);
+      return Component.apply(Component, args);
+    };
+    f.Config = Config;
+    return f;
+  }
+
   //
   // common props
   //
@@ -65,14 +76,15 @@
         dismissAfter: Num
     }), '$Alert');
 
-    Struct.prototype.render = function(children) {
-      var args = [this].concat(children);
-      return bs.Alert.apply(bs.Alert, args);
+    Struct.prototype.render = function() {
+      var args = [this].concat(arguments);
+      return Component.apply(Component, args);
     };
 
-    var Alert = subtype(Struct, concurrentProps('onDismiss', 'dismissAfter'), 'Alert');
+    var Config = subtype(Struct, concurrentProps('onDismiss', 'dismissAfter'), 'Alert');
+    var Component = bs.Alert;
 
-    return Alert;
+    return bind(Config, Component);
 
   })();
 
