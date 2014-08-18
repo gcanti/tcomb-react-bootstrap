@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var mountNode = document.getElementById('fixture');
 
+var React = TcombReactBootstrap.React;
 var Alert = TcombReactBootstrap.Alert;
 
 // build a component with jsx..

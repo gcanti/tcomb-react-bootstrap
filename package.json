@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "jsx -w -x jsx --no-cache-dir test/jsx test/"
+    "jsx": "jsx -w -x jsx --no-cache-dir test/jsx test/",
+    "watch": "watchify index.js -o build/bundle.js -v --standalone TcombReactBootstrap"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,14 @@
   "devDependencies": {
     "react-tools": "*",
     "react-bootstrap": "*",
-    "tcomb": "*"
+    "tcomb": "*",
+    "reactify": "~0.4.0",
+    "watchify": "~0.4.1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
   },
   "tags": [ 
     "react",

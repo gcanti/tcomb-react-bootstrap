@@ -1,95 +1,96 @@
-(function (root, factory) {
-  'use strict';
-  if (typeof define === 'function' && define.amd) {
-    // TODO
-    define([], factory);
-  } else if (typeof exports === 'object') {
-    module.exports = factory(require('react'), require('react-bootstrap'), require('react-bootstrap/constants'), require('tcomb'));
-  } else {
-    root.TcombReactBootstrap = factory(root.React, root.ReactBootstrap, root.ReactBootstrap.constants, root.t);
-  }
-}(this, function (React, bs, constants, t) {
+'use strict';
 
-  'use strict';
+var React = require('react');
+var ReactBootstrap = require('react-bootstrap');
+var constants = require('react-bootstrap/constants');
+var t = require('tcomb');
 
-  var Nil = t.Nil;
-  var Str = t.Str;
-  var Num = t.Num;
-  var Func = t.Func;
-  var struct = t.struct;
-  var subtype = t.subtype;
-  var enums = t.enums;
-  var maybe = t.maybe;
+var Nil = t.Nil;
+var Str = t.Str;
+var Num = t.Num;
+var Func = t.Func;
+var struct = t.struct;
+var subtype = t.subtype;
+var enums = t.enums;
+var maybe = t.maybe;
 
-  //
-  // utils
-  //
+//
+// utils
+//
 
-  // make all types of a struct optional
-  function maybefy(props) {
-    var ret = {};
-    for (var k in props) {
-      if (props.hasOwnProperty(k)) {
-        ret[k] = maybe(props[k]);
-      }
-    }
-    return ret;
-  }
-
-  function concurrentProps(p1, p2) {
-    return function (x) {
-      return Nil.is(x[p1]) === Nil.is(x[p2]);
+// make all types of a struct optional
+function maybefy(props) {
+  var ret = {};
+  for (var k in props) {
+    if (props.hasOwnProperty(k)) {
+      ret[k] = maybe(props[k]);
     }
   }
+  return ret;
+}
 
-  function bind(Config, Component) {
-    var f = function(config) {
-      config = Config(config);
-      var args = Array.prototype.slice.call(arguments, 1);
-      args = [config].concat(args);
-      return Component.apply(Component, args);
-    };
-    f.Config = Config;
-    return f;
+function concurrentProps(p1, p2) {
+  return function (x) {
+    return Nil.is(x[p1]) === Nil.is(x[p2]);
   }
+}
 
-  //
-  // common props
-  //
+function bind(Config, Component) {
+  var f = function(config) {
+    config = Config(config);
+    var args = Array.prototype.slice.call(arguments, 1);
+    args = [config].concat(args);
+    return Component.apply(Component, args);
+  };
+  f.Config = Config;
+  return f;
+}
 
-  var BsClass = enums(constants.CLASSES);
-  var BsStyle = enums(constants.STYLES);
-  var BsSize = enums(constants.SIZES);
-  var Glyph = enums.of(constants.GLYPHS);
+//
+// common props
+//
 
-  //
-  // Alert
-  //
+var BsClass = enums(constants.CLASSES, 'BsClass');
+var BsStyle = enums(constants.STYLES, 'BsStyle');
+var BsSize = enums(constants.SIZES, 'BsSize');
+var Glyph = enums.of(constants.GLYPHS, 'Glyph');
 
-  var Alert = (function () {
+//
+// Alert
+//
 
-    var Struct = struct(maybefy({
-        bsClass: BsClass,
-        bsStyle: BsStyle,
-        bsSize: BsSize,
-        onDismiss: Func,
-        dismissAfter: Num
-    }), '$Alert');
+var Alert = (function () {
 
-    Struct.prototype.render = function() {
-      var args = [this].concat(arguments);
-      return Component.apply(Component, args);
-    };
+  var Struct = struct(maybefy({
+      bsClass: BsClass,
+      bsStyle: BsStyle,
+      bsSize: BsSize,
+      onDismiss: Func,
+      dismissAfter: Num
+  }), '$Alert');
 
-    var Config = subtype(Struct, concurrentProps('onDismiss', 'dismissAfter'), 'Alert');
-    var Component = bs.Alert;
+  Struct.prototype.render = function() {
+    var args = [this].concat(arguments);
+    return Component.apply(Component, args);
+  };
 
-    return bind(Config, Component);
+  var Config = subtype(Struct, concurrentProps('onDismiss', 'dismissAfter'), 'Alert');
+  var Component = ReactBootstrap.Alert;
 
-  })();
+  return bind(Config, Component);
 
-  return {
-    Alert: Alert
-  }
+})();
 
-}));
+module.exports = {
+  React: React,
+  Alert: Alert
+};
+
+/*
+var doc = require('../tcomb-doc');
+var index = doc.toJSON({
+  Alert: Alert.Config
+});
+console.log(JSON.stringify(index, null, 2));
+//console.log(doc.toMarkdown(index));
+*/
