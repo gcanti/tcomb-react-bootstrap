@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "jsx": "jsx -w -x jsx --no-cache-dir test/jsx test/",
-    "watch": "watchify index.js -o build/bundle.js -v --standalone TcombReactBootstrap"
+    "jsx": "jsx -w -x jsx --no-cache-dir test/src test/build",
+    "watch": "watchify index.js -o test/build/bundle.js -v -r ./index:tcomb-react-bootstrap -r react"
   },
   "repository": {
     "type": "git",
@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/gcanti/tcomb-react-bootstrap",
   "devDependencies": {
-    "react-tools": "*",
     "react-bootstrap": "*",
-    "tcomb": "*",
+    "react-tools": "*",
     "reactify": "~0.4.0",
+    "tcomb": "*",
     "watchify": "~0.4.1"
   },
   "browserify": {
@@ -30,7 +30,7 @@
       "reactify"
     ]
   },
-  "tags": [ 
+  "tags": [
     "react",
     "bootstrap"
   ]
