@@ -22,22 +22,3 @@ This library is an attempt to add type safety to the awesome project [React Boot
       </Alert>
     ); // => fail! debugger kicks in
 
-## Ready components
-
-- Accordion
-- Affix
-- Alert
-- Badge
-- Button
-- ButtunGroup
-- ButtonToolbar
-- Carousel
-- CarouselItem
-- Col
-- DropdownButton
-- DropdownMenu
-- Glyphicon
-- Grid
-- Input
-- Panel
-- PanelGroup

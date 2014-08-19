@@ -40,7 +40,7 @@ var Pager = bs.Pager;
 var Panel = bs.Panel;
 var PanelGroup = bs.PanelGroup;
 var Popover = bs.Popover;
-var ProgessBar = bs.ProgessBar;
+var ProgressBar = bs.ProgressBar;
 var Row = bs.Row;
 var SplitButton = bs.SplitButton;
 var SubNav = bs.SubNav;
@@ -205,6 +205,66 @@ append(
   )
 );
 
+// modal
+
+function handleHide() {
+  this.close();
+}
+
+/*
+append(
+  <Modal title="Modal title"
+    backdrop={false}
+    animation={false}
+    onRequestHide={handleHide}>
+    <div className="modal-body">
+      One fine body...
+    </div>
+    <div className="modal-footer">
+      <Button>Close</Button>
+      <Button bsStyle="primary">Save changes</Button>
+    </div>
+  </Modal>
+);
+*/
+
+// Nav
+
+append(
+  Nav({bsStyle: "pills", activeKey: 1, onSelect: handleSelect}, 
+    NavItem({key: 1, href: "/home"}, "NavItem 1 content"), 
+    NavItem({key: 2, title: "Item"}, "NavItem 2 content"), 
+    NavItem({key: 3, disabled: true}, "NavItem 3 content")
+  )
+);
+
+// Navbar
+
+append(
+  Navbar(null, 
+    Nav(null, 
+      NavItem({key: 1, href: "#"}, "Link"), 
+      NavItem({key: 2, href: "#"}, "Link"), 
+      DropdownButton({key: 3, title: "Dropdown"}, 
+        MenuItem({key: "1"}, "Action"), 
+        MenuItem({key: "2"}, "Another action"), 
+        MenuItem({key: "3"}, "Something else here"), 
+        MenuItem({divider: true}), 
+        MenuItem({key: "4"}, "Separated link")
+      )
+    )
+  )
+);
+
+// Pager, PageItem
+
+append(
+  Pager(null, 
+    PageItem({href: "#"}, "Previous"), 
+    PageItem({href: "#"}, "Next")
+  )
+);
+
 // PanelGroup / Panel
 
 function handleSelect (selectedKey) {
@@ -220,3 +280,105 @@ var panelGroup = append(
   )
 );
 
+// Popover
+
+var holderStyle = {height: 120, position: 'relative'};
+
+append(
+  React.DOM.div({style: holderStyle}, 
+    Popover({placement: "right", positionLeft: 200, positionTop: 50, title: "Popover right"}, 
+      "And here's some ", React.DOM.strong(null, "amazing"), " content. It's very engaging. right?"
+    )
+  )
+);
+
+// ProgressBar
+
+append(
+  React.DOM.div(null, 
+    ProgressBar({striped: true, bsStyle: "success", now: 40}), 
+    ProgressBar({striped: true, bsStyle: "info", now: 20}), 
+    ProgressBar({striped: true, bsStyle: "warning", now: 60}), 
+    ProgressBar({striped: true, bsStyle: "danger", now: 80})
+  )
+);
+
+// SplitButton
+
+function renderDropdownButton(title) {
+  return (
+    SplitButton({bsStyle: title.toLowerCase(), title: title}, 
+      MenuItem({key: "1"}, "Action"), 
+      MenuItem({key: "2"}, "Another action"), 
+      MenuItem({key: "3"}, "Something else here"), 
+      MenuItem({divider: true}), 
+      MenuItem({key: "4"}, "Separated link")
+    )
+  );
+}
+
+append(
+  ButtonToolbar(null, BUTTONS.map(renderDropdownButton))
+);
+
+// TabArea, TabPane
+
+append(
+  TabbedArea({defaultActiveKey: 2}, 
+    TabPane({key: 1, tab: "Tab 1"}, "TabPane 1 content"), 
+    TabPane({key: 2, tab: "Tab 2"}, "TabPane 2 content")
+  )
+);
+
+// Table
+
+append(
+  Table({striped: true, bordered: true, condensed: true, hover: true}, 
+    React.DOM.thead(null, 
+      React.DOM.tr(null, 
+        React.DOM.th(null, "#"), 
+        React.DOM.th(null, "First Name"), 
+        React.DOM.th(null, "Last Name"), 
+        React.DOM.th(null, "Username")
+      )
+    ), 
+    React.DOM.tbody(null, 
+      React.DOM.tr(null, 
+        React.DOM.td(null, "1"), 
+        React.DOM.td(null, "Mark"), 
+        React.DOM.td(null, "Otto"), 
+        React.DOM.td(null, "@mdo")
+      ), 
+      React.DOM.tr(null, 
+        React.DOM.td(null, "2"), 
+        React.DOM.td(null, "Jacob"), 
+        React.DOM.td(null, "Thornton"), 
+        React.DOM.td(null, "@fat")
+      ), 
+      React.DOM.tr(null, 
+        React.DOM.td(null, "3"), 
+        React.DOM.td({colSpan: "2"}, "Larry the Bird"), 
+        React.DOM.td(null, "@twitter")
+      )
+    )
+  )
+);
+
+// Tooltip
+
+append(
+  React.DOM.div({style: holderStyle}, 
+    Tooltip({placement: "right", positionLeft: 150, positionTop: 50}, 
+      React.DOM.strong(null, "Holy guacamole!"), " Check this info."
+    )
+  )
+);
+
+// Wells
+
+append(
+  React.DOM.div(null, 
+    Well({bsSize: "large"}, "Look I'm in a large well!"), 
+    Well({bsSize: "small"}, "Look I'm in a small well!")
+  )
+);

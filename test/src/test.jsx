@@ -40,7 +40,7 @@ var Pager = bs.Pager;
 var Panel = bs.Panel;
 var PanelGroup = bs.PanelGroup;
 var Popover = bs.Popover;
-var ProgessBar = bs.ProgessBar;
+var ProgressBar = bs.ProgressBar;
 var Row = bs.Row;
 var SplitButton = bs.SplitButton;
 var SubNav = bs.SubNav;
@@ -205,6 +205,66 @@ append(
   </form>
 );
 
+// modal
+
+function handleHide() {
+  this.close();
+}
+
+/*
+append(
+  <Modal title="Modal title"
+    backdrop={false}
+    animation={false}
+    onRequestHide={handleHide}>
+    <div className="modal-body">
+      One fine body...
+    </div>
+    <div className="modal-footer">
+      <Button>Close</Button>
+      <Button bsStyle="primary">Save changes</Button>
+    </div>
+  </Modal>
+);
+*/
+
+// Nav
+
+append(
+  <Nav bsStyle="pills" activeKey={1} onSelect={handleSelect}>
+    <NavItem key={1} href="/home">NavItem 1 content</NavItem>
+    <NavItem key={2} title="Item">NavItem 2 content</NavItem>
+    <NavItem key={3} disabled={true}>NavItem 3 content</NavItem>
+  </Nav>
+);
+
+// Navbar
+
+append(
+  <Navbar>
+    <Nav>
+      <NavItem key={1} href="#">Link</NavItem>
+      <NavItem key={2} href="#">Link</NavItem>
+      <DropdownButton key={3} title="Dropdown">
+        <MenuItem key="1">Action</MenuItem>
+        <MenuItem key="2">Another action</MenuItem>
+        <MenuItem key="3">Something else here</MenuItem>
+        <MenuItem divider />
+        <MenuItem key="4">Separated link</MenuItem>
+      </DropdownButton>
+    </Nav>
+  </Navbar>
+);
+
+// Pager, PageItem
+
+append(
+  <Pager>
+    <PageItem href="#">Previous</PageItem>
+    <PageItem href="#">Next</PageItem>
+  </Pager>
+);
+
 // PanelGroup / Panel
 
 function handleSelect (selectedKey) {
@@ -220,3 +280,105 @@ var panelGroup = append(
   </PanelGroup>
 );
 
+// Popover
+
+var holderStyle = {height: 120, position: 'relative'};
+
+append(
+  <div style={holderStyle}>
+    <Popover placement="right" positionLeft={200} positionTop={50} title="Popover right">
+      And here's some <strong>amazing</strong> content. It's very engaging. right?
+    </Popover>
+  </div>
+);
+
+// ProgressBar
+
+append(
+  <div>
+    <ProgressBar striped bsStyle="success" now={40} />
+    <ProgressBar striped bsStyle="info" now={20} />
+    <ProgressBar striped bsStyle="warning" now={60} />
+    <ProgressBar striped bsStyle="danger" now={80} />
+  </div>
+);
+
+// SplitButton
+
+function renderDropdownButton(title) {
+  return (
+    <SplitButton bsStyle={title.toLowerCase()} title={title}>
+      <MenuItem key="1">Action</MenuItem>
+      <MenuItem key="2">Another action</MenuItem>
+      <MenuItem key="3">Something else here</MenuItem>
+      <MenuItem divider />
+      <MenuItem key="4">Separated link</MenuItem>
+    </SplitButton>
+  );
+}
+
+append(
+  <ButtonToolbar>{BUTTONS.map(renderDropdownButton)}</ButtonToolbar>
+);
+
+// TabArea, TabPane
+
+append(
+  <TabbedArea defaultActiveKey={2}>
+    <TabPane key={1} tab="Tab 1">TabPane 1 content</TabPane>
+    <TabPane key={2} tab="Tab 2">TabPane 2 content</TabPane>
+  </TabbedArea>
+);
+
+// Table
+
+append(
+  <Table striped bordered condensed hover>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td colSpan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </Table>
+);
+
+// Tooltip
+
+append(
+  <div style={holderStyle}>
+    <Tooltip placement="right" positionLeft={150} positionTop={50}>
+      <strong>Holy guacamole!</strong> Check this info.
+    </Tooltip>
+  </div>
+);
+
+// Wells
+
+append(
+  <div>
+    <Well bsSize="large">Look I'm in a large well!</Well>
+    <Well bsSize="small">Look I'm in a small well!</Well>
+  </div>
+);

@@ -24350,6 +24350,7 @@ var subtype = t.subtype;
 var enums = t.enums;
 var maybe = t.maybe;
 var union = t.union;
+var list = t.list;
 var format = t.format;
 var mixin = t.mixin;
 
@@ -24400,8 +24401,9 @@ function modelFactory(componentName, props, mixins) {
 // React props
 //
 var Renderable = Any; // TODO: better typing of React.PropTypes.renderable
-var Key = union([Str, Num]);
+var Key = union([Str, Num], 'Key');
 var ComponentClass = Str; // TODO implement valid React component class
+var Mountable = Any; // TODO better typing
 
 //
 // common bootstrap props
@@ -24410,6 +24412,8 @@ var BsClass = enums(constants.CLASSES, 'BsClass');
 var BsStyle = enums(constants.STYLES, 'BsStyle');
 var BsSize = enums(constants.SIZES, 'BsSize');
 var Glyph = enums.of(constants.GLYPHS, 'Glyph');
+var Placement = enums.of('top right bottom left', 'Placement');
+var NavStyle = enums.of('tabs pills', 'NavStyle');
 
 //
 // mixins
@@ -24548,7 +24552,8 @@ var DropdownButton = modelFactory('DropdownButton', {
   href:      maybe(Str),
   onClick:   maybe(Func),
   onSelect:  maybe(Func),
-  navItem:   maybe(Bool)
+  navItem:   maybe(Bool),
+  key: maybe(Key) // TODO: report missing propType
 }, [BootstrapMixin]);
 
 //
@@ -24600,7 +24605,7 @@ var Input = modelFactory('Input', {
 // Jumbotron
 //
 var Jumbotron = modelFactory('Jumbotron', {
-}, [BootstrapMixin]);
+});
 
 //
 // Label
@@ -24612,71 +24617,132 @@ var Label = modelFactory('Label', {
 // MenuItem
 //
 var MenuItem = modelFactory('MenuItem', {
+  header:   maybe(Bool),
+  divider:  maybe(Bool),
+  href:     maybe(Str),
+  title:    maybe(Str),
+  onSelect: maybe(Func),
   key: maybe(Key) // TODO: report missing propType
 });
 
 //
 // Modal
 //
+var Backdrop = union([enums.of('static'), Bool], 'Backdrop');
 var Modal = modelFactory('Modal', {
+  title: maybe(Renderable),
+  backdrop: maybe(Backdrop),
+  keyboard: maybe(Bool),
+  closeButton: maybe(Bool),
+  animation: maybe(Bool),
+  onRequestHide: Func
 }, [BootstrapMixin]);
 
 //
 // ModalTrigger
 //
 var ModalTrigger = modelFactory('ModalTrigger', {
-}, [BootstrapMixin]);
+  container: maybe(Mountable),
+  modal: Renderable
+});
 
 //
 // Nav
 //
 var Nav = modelFactory('Nav', {
-}, [BootstrapMixin]);
+  bsClass: maybe(BsClass),
+  bsStyle: maybe(NavStyle), // TODO: report duplicate propType in BootstrapMixin
+  bsSize: maybe(BsSize),
+  stacked: maybe(Bool),
+  justified: maybe(Bool),
+  onSelect: maybe(Func),
+  collapsable: maybe(Bool), // TODO: report duplicate propType in CollapsableMixin
+  expanded: maybe(Bool), // TODO: report duplicate propType in CollapsableMixin
+  defaultExpanded: maybe(Bool),
+  navbar: maybe(Bool),
+  activeKey: maybe(Key) // TODO: report missin propType
+});
 
 //
 // Navbar
 //
 var Navbar = modelFactory('Navbar', {
+  fixedTop: maybe(Bool),
+  fixedBottom: maybe(Bool),
+  staticTop: maybe(Bool),
+  inverse: maybe(Bool),
+  fluid: maybe(Bool),
+  role: maybe(Str),
+  componentClass: maybe(ComponentClass),
+  brand: maybe(Renderable),
+  toggleButton: maybe(Renderable),
+  onToggle: maybe(Func),
+  navExpanded: maybe(Bool),
+  defaultNavExpanded: maybe(Bool)
 }, [BootstrapMixin]);
 
 //
 // NavItem
 //
 var NavItem = modelFactory('NavItem', {
+  onSelect: maybe(Func),
+  active: maybe(Bool),
+  disabled: maybe(Bool),
+  href: maybe(Str),
+  title: maybe(Str),
+  key: maybe(Key)
 }, [BootstrapMixin]);
 
 //
 // OverlayTrigger
 //
+var TriggerA = enums.of('manual click hover focus', 'TriggerA'); // TODO understand what are these types
+var TriggerB = enums.of('click hover focus', 'TriggerB');
+var TriggerC = list(TriggerB);
+var Trigger = union([TriggerA, TriggerC]);
 var OverlayTrigger = modelFactory('OverlayTrigger', {
+  container: maybe(Mountable),
+  trigger: maybe(Trigger),
+  placement: maybe(Placement),
+  delay: maybe(Num),
+  delayShow: maybe(Num),
+  delayHide: maybe(Num),
+  defaultOverlayShown: maybe(Bool),
+  overlay: Renderable
 }, [BootstrapMixin]);
 
 //
 // PageHeader
 //
 var PageHeader = modelFactory('PageHeader', {
-}, [BootstrapMixin]);
+});
 
 //
 // PageItem
 //
 var PageItem = modelFactory('PageItem', {
-}, [BootstrapMixin]);
+  disabled: maybe(Bool),
+  previous: maybe(Bool),
+  next: maybe(Bool),
+  onSelect: maybe(Func),
+  href: maybe(Str) // TODO: report missing propType
+});
 
 //
 // Pager
 //
 var Pager = modelFactory('Pager', {
-}, [BootstrapMixin]);
+  onSelect: maybe(Func)
+});
 
 //
 // Panel
 //
 var Panel = modelFactory('Panel', {
-  header: Renderable,
-  footer: Renderable,
+  header: maybe(Renderable),
+  footer: maybe(Renderable),
   onClick: maybe(Func),
-  key: Key // TODO: report missing propType
+  key: maybe(Key) // TODO: report missing propType
 }, [BootstrapMixin, CollapsableMixin]);
 
 //
@@ -24694,54 +24760,99 @@ var PanelGroup = modelFactory('PanelGroup', {
 // Popover
 //
 var Popover = modelFactory('Popover', {
+  placement: Placement,
+  positionLeft: maybe(Num),
+  positionTop: maybe(Num),
+  arrowOffsetLeft: maybe(Num),
+  arrowOffsetTop: maybe(Num),
+  title: maybe(Renderable)
 }, [BootstrapMixin]);
 
 //
-// ProgessBar
+// ProgressBar
 //
-var ProgessBar = modelFactory('ProgessBar', {
+var ProgressBar = modelFactory('ProgessBar', {
+  min: maybe(Num),
+  now: maybe(Num),
+  max: maybe(Num),
+  label: maybe(Renderable),
+  srOnly: maybe(Bool),
+  striped: maybe(Bool),
+  active: maybe(Bool)
 }, [BootstrapMixin]);
 
 //
 // Row
 //
 var Row = modelFactory('Row', {
-}, [BootstrapMixin]);
+  componentClass: maybe(ComponentClass)
+});
 
 //
 // SplitButton
 //
 var SplitButton = modelFactory('SplitButton', {
+  pullRight:     maybe(Bool),
+  title:         maybe(Renderable),
+  href:          maybe(Str),
+  dropdownTitle: maybe(Renderable),
+  onClick:       maybe(Func),
+  onSelect:      maybe(Func),
+  disabled:      maybe(Bool)
 }, [BootstrapMixin]);
 
 //
 // SubNav
 //
 var SubNav = modelFactory('SubNav', {
+  onSelect: maybe(Func),
+  active: maybe(Bool),
+  disabled: maybe(Bool),
+  href: maybe(Str),
+  title: maybe(Str),
+  text: maybe(Renderable)
 }, [BootstrapMixin]);
 
 //
 // TabbedArea
 //
 var TabbedArea = modelFactory('TabbedArea', {
-}, [BootstrapMixin]);
+  bsClass: maybe(BsClass),
+  bsStyle: maybe(NavStyle), // TODO: report duplicate propType in BootstrapMixin
+  bsSize: maybe(BsSize),
+  animation: maybe(Bool),
+  onSelect: maybe(Func),
+  defaultActiveKey: maybe(Key) // TODO: report missing propType
+});
 
 //
 // Table
 //
 var Table = modelFactory('Table', {
-}, [BootstrapMixin]);
+  striped: maybe(Bool),
+  bordered: maybe(Bool),
+  condensed: maybe(Bool),
+  hover: maybe(Bool),
+  responsive: maybe(Bool)
+});
 
 //
 // TabPane
 //
 var TabPane = modelFactory('TabPane', {
-}, [BootstrapMixin]);
+  key: maybe(Key), // TODO: report missing propType
+  tab: maybe(Str) // TODO: report missing propType
+});
 
 //
 // Tooltip
 //
 var Tooltip = modelFactory('Tooltip', {
+  placement: maybe(Placement),
+  positionLeft: maybe(Num),
+  positionTop: maybe(Num),
+  arrowOffsetLeft: maybe(Num),
+  arrowOffsetTop: maybe(Num)
 }, [BootstrapMixin]);
 
 //
@@ -24781,7 +24892,7 @@ module.exports = {
   Panel: Panel,
   PanelGroup: PanelGroup,
   Popover: Popover,
-  ProgessBar: ProgessBar,
+  ProgressBar: ProgressBar,
   Row: Row,
   SplitButton: SplitButton,
   SubNav: SubNav,
