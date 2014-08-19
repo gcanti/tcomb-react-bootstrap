@@ -1,7 +1,5 @@
 # tcomb-react-bootstrap
 
-tcomb bindings for react-bootstrap (proof of concept)
-
 This library is an attempt to add type safety to the awesome project [React Bootstrap](http://react-bootstrap.github.io).
 
 ## Example
