@@ -6,20 +6,18 @@ This library is an attempt to add type safety to the awesome project [React Boot
 
 ## Example
 
-```javascript
-/** @jsx React.DOM */
-var components = require('tcomb-react-bootstrap').components;
-var Alert = components.Alert;
+    /** @jsx React.DOM */
+    var components = require('tcomb-react-bootstrap').components;
+    var Alert = components.Alert;
 
-var good = (
-  <Alert bsStyle="warning">
-    <strong>Holy guacamole!</strong> Best check yo self, you re not looking too good.
-  </Alert>
-); // => ok!
+    var good = (
+      <Alert bsStyle="warning">
+        <strong>Holy guacamole!</strong> Best check yo self, you re not looking too good.
+      </Alert>
+    ); // => ok!
 
-var bad = (
-  <Alert bsStyle="warn"> // <-- typo, should be "warnings"
-    <strong>Holy guacamole!</strong> Best check yo self, you re not looking too good.
-  </Alert>
-); // => fail! debugger kicks in
-```
+    var bad = (
+      <Alert bsStyle="warn"> // <-- typo, should be "warnings"
+        <strong>Holy guacamole!</strong> Best check yo self, you re not looking too good.
+      </Alert>
+    ); // => fail! debugger kicks in
