@@ -20,6 +20,7 @@ var warn = (function () {
 
 function bind(name) {
   var Model = domain[name];
+  // export
   exports[name] = function (props) {
     // if there are no attributes React send null instead of {}
     props = props || {};
@@ -30,6 +31,7 @@ function bind(name) {
     if (Model.warnings) {
       warn(Model.warnings(props));
     }
+    // redirect to react-bootstrap
     var c = ReactBootstrap[name]; 
     return c.apply(c, arguments);
   };

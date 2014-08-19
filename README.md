@@ -17,7 +17,27 @@ This library is an attempt to add type safety to the awesome project [React Boot
     ); // => ok!
 
     var bad = (
-      <Alert bsStyle="warn"> // <-- typo, should be "warnings"
+      <Alert bsStyle="warn"> // <-- typo, should be "warning"
         <strong>Holy guacamole!</strong> Best check yo self, you re not looking too good.
       </Alert>
     ); // => fail! debugger kicks in
+
+## Ready components
+
+- Accordion
+- Affix
+- Alert
+- Badge
+- Button
+- ButtunGroup
+- ButtonToolbar
+- Carousel
+- CarouselItem
+- Col
+- DropdownButton
+- DropdownMenu
+- Glyphicon
+- Grid
+- Input
+- Panel
+- PanelGroup

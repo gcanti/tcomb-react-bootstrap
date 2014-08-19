@@ -1,234 +1,39 @@
-//
-// Accordion
-//
-var Accordion = modelFactory('Accordion', {
-}, [BootstrapMixin]);
-
-//
-// Affix
-//
-var Affix = modelFactory('Affix', {
-}, [BootstrapMixin]);
-
-//
-// Alert
-//
-var Alert = modelFactory('Alert', {
-}, [BootstrapMixin]);
-
-//
-// Badge
-//
-var Badge = modelFactory('Badge', {
-}, [BootstrapMixin]);
-
-//
-// Button
-//
-var Button = modelFactory('Button', {
-}, [BootstrapMixin]);
-
-//
-// ButtonGroup
-//
-var ButtonGroup = modelFactory('ButtonGroup', {
-}, [BootstrapMixin]);
-
-//
-// ButtonToolbar
-//
-var ButtonToolbar = modelFactory('ButtonToolbar', {
-}, [BootstrapMixin]);
-
-//
-// Carousel
-//
-var Carousel = modelFactory('Carousel', {
-}, [BootstrapMixin]);
-
-//
-// CarouselItem
-//
-var CarouselItem = modelFactory('CarouselItem', {
-}, [BootstrapMixin]);
-
-//
-// Col
-//
-var Col = modelFactory('Col', {
-}, [BootstrapMixin]);
-
-//
-// DropdownButton
-//
-var DropdownButton = modelFactory('DropdownButton', {
-}, [BootstrapMixin]);
-
-//
-// DropdownMenu
-//
-var DropdownMenu = modelFactory('DropdownMenu', {
-}, [BootstrapMixin]);
-
-//
-// Glyphicon
-//
-var Glyphicon = modelFactory('Glyphicon', {
-}, [BootstrapMixin]);
-
-//
-// Grid
-//
-var Grid = modelFactory('Grid', {
-}, [BootstrapMixin]);
-
-//
-// Input
-//
-var Input = modelFactory('Input', {
-}, [BootstrapMixin]);
-
-//
-// Jumbotron
-//
-var Jumbotron = modelFactory('Jumbotron', {
-}, [BootstrapMixin]);
-
-//
-// Label
-//
-var Label = modelFactory('Label', {
-}, [BootstrapMixin]);
-
-//
-// MenuItem
-//
-var MenuItem = modelFactory('MenuItem', {
-}, [BootstrapMixin]);
-
-//
-// Modal
-//
-var Modal = modelFactory('Modal', {
-}, [BootstrapMixin]);
-
-//
-// ModalTrigger
-//
-var ModalTrigger = modelFactory('ModalTrigger', {
-}, [BootstrapMixin]);
-
-//
-// Nav
-//
-var Nav = modelFactory('Nav', {
-}, [BootstrapMixin]);
-
-//
-// Navbar
-//
-var Navbar = modelFactory('Navbar', {
-}, [BootstrapMixin]);
-
-//
-// NavItem
-//
-var NavItem = modelFactory('NavItem', {
-}, [BootstrapMixin]);
-
-//
-// OverlayTrigger
-//
-var OverlayTrigger = modelFactory('OverlayTrigger', {
-}, [BootstrapMixin]);
-
-//
-// PageHeader
-//
-var PageHeader = modelFactory('PageHeader', {
-}, [BootstrapMixin]);
-
-//
-// PageItem
-//
-var PageItem = modelFactory('PageItem', {
-}, [BootstrapMixin]);
-
-//
-// Pager
-//
-var Pager = modelFactory('Pager', {
-}, [BootstrapMixin]);
-
-//
-// Panel
-//
-var Panel = modelFactory('Panel', {
-}, [BootstrapMixin]);
-
-//
-// PanelGroup
-//
-var PanelGroup = modelFactory('PanelGroup', {
-}, [BootstrapMixin]);
-
-//
-// Popover
-//
-var Popover = modelFactory('Popover', {
-}, [BootstrapMixin]);
-
-//
-// ProgessBar
-//
-var ProgessBar = modelFactory('ProgessBar', {
-}, [BootstrapMixin]);
-
-//
-// Row
-//
-var Row = modelFactory('Row', {
-}, [BootstrapMixin]);
-
-//
-// SplitButton
-//
-var SplitButton = modelFactory('SplitButton', {
-}, [BootstrapMixin]);
-
-//
-// SubNav
-//
-var SubNav = modelFactory('SubNav', {
-}, [BootstrapMixin]);
-
-//
-// TabbedArea
-//
-var TabbedArea = modelFactory('TabbedArea', {
-}, [BootstrapMixin]);
-
-//
-// Table
-//
-var Table = modelFactory('Table', {
-}, [BootstrapMixin]);
-
-//
-// TabPane
-//
-var TabPane = modelFactory('TabPane', {
-}, [BootstrapMixin]);
-
-//
-// Tooltip
-//
-var Tooltip = modelFactory('Tooltip', {
-}, [BootstrapMixin]);
-
-//
-// Well
-//
-var Well = modelFactory('Well', {
-}, [BootstrapMixin]);
-
+var Accordion = bs.Accordion;
+var Affix = bs.Affix;
+var Alert = bs.Alert;
+var Badge = bs.Badge;
+var Button = bs.Button;
+var ButtonGroup = bs.ButtonGroup;
+var ButtonToolbar = bs.ButtonToolbar;
+var Carousel = bs.Carousel;
+var CarouselItem = bs.CarouselItem;
+var Col = bs.Col;
+var DropdownButton = bs.DropdownButton;
+var DropdownMenu = bs.DropdownMenu;
+var Glyphicon = bs.Glyphicon;
+var Grid = bs.Grid;
+var Input = bs.Input;
+var Jumbotron = bs.Jumbotron;
+var Label = bs.Label;
+var MenuItem = bs.MenuItem;
+var Modal = bs.Modal;
+var ModalTrigger = bs.ModalTrigger;
+var Nav = bs.Nav;
+var Navbar = bs.Navbar;
+var NavItem = bs.NavItem;
+var OverlayTrigger = bs.OverlayTrigger;
+var PageHeader = bs.PageHeader;
+var PageItem = bs.PageItem;
+var Pager = bs.Pager;
+var Panel = bs.Panel;
+var PanelGroup = bs.PanelGroup;
+var Popover = bs.Popover;
+var ProgessBar = bs.ProgessBar;
+var Row = bs.Row;
+var SplitButton = bs.SplitButton;
+var SubNav = bs.SubNav;
+var TabbedArea = bs.TabbedArea;
+var Table = bs.Table;
+var TabPane = bs.TabPane;
+var Tooltip = bs.Tooltip;
+var Well = bs.Well;

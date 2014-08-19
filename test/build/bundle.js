@@ -24311,6 +24311,7 @@ var warn = (function () {
 
 function bind(name) {
   var Model = domain[name];
+  // export
   exports[name] = function (props) {
     // if there are no attributes React send null instead of {}
     props = props || {};
@@ -24321,6 +24322,7 @@ function bind(name) {
     if (Model.warnings) {
       warn(Model.warnings(props));
     }
+    // redirect to react-bootstrap
     var c = ReactBootstrap[name]; 
     return c.apply(c, arguments);
   };
@@ -24397,7 +24399,9 @@ function modelFactory(componentName, props, mixins) {
 //
 // React props
 //
+var Renderable = Any; // TODO: better typing of React.PropTypes.renderable
 var Key = union([Str, Num]);
+var ComponentClass = Str; // TODO implement valid React component class
 
 //
 // common bootstrap props
@@ -24432,7 +24436,10 @@ var Accordion = modelFactory('Accordion', {
 // Affix
 //
 var Affix = modelFactory('Affix', {
-}, [BootstrapMixin]);
+  offset: maybe(Num),
+  offsetTop: maybe(Num),
+  offsetBottom: maybe(Num)
+});
 
 //
 // Alert
@@ -24453,7 +24460,8 @@ Alert.warnings = function (props) {
 // Badge
 //
 var Badge = modelFactory('Badge', {
-}, [BootstrapMixin]);
+  pullRight: maybe(Bool)
+});
 
 //
 // Button
@@ -24470,61 +24478,123 @@ var Button = modelFactory('Button', {
 // ButtonGroup
 //
 var ButtonGroup = modelFactory('ButtonGroup', {
+  vertical:  maybe(Bool),
+  justified: maybe(Bool)
 }, [BootstrapMixin]);
 
 //
 // ButtonToolbar
 //
-var ButtonToolbar = modelFactory('ButtonToolbar', {
+var ButtonToolbar = modelFactory('ButtonToolbar', { // TODO: report wrong displayName (ButtonGroup)
 }, [BootstrapMixin]);
 
 //
 // Carousel
 //
+var Direction = enums.of('prev, next', 'Direction');
 var Carousel = modelFactory('Carousel', {
+  slide: maybe(Bool),
+  indicators: maybe(Bool),
+  controls: maybe(Bool),
+  pauseOnHover: maybe(Bool),
+  wrap: maybe(Bool),
+  onSelect: maybe(Func),
+  onSlideEnd: maybe(Func),
+  activeIndex: maybe(Num),
+  defaultActiveIndex: maybe(Num),
+  direction: maybe(Direction)
 }, [BootstrapMixin]);
 
 //
 // CarouselItem
 //
 var CarouselItem = modelFactory('CarouselItem', {
-}, [BootstrapMixin]);
+  direction: maybe(Direction),
+  onAnimateOutEnd: maybe(Func),
+  active: maybe(Bool),
+  caption: maybe(Renderable)
+});
 
 //
 // Col
 //
 var Col = modelFactory('Col', {
-}, [BootstrapMixin]);
+  xs: maybe(Num),
+  sm: maybe(Num),
+  md: maybe(Num),
+  lg: maybe(Num),
+  xsOffset: maybe(Num),
+  smOffset: maybe(Num),
+  mdOffset: maybe(Num),
+  lgOffset: maybe(Num),
+  xsPush: maybe(Num),
+  smPush: maybe(Num),
+  mdPush: maybe(Num),
+  lgPush: maybe(Num),
+  xsPull: maybe(Num),
+  smPull: maybe(Num),
+  mdPull: maybe(Num),
+  lgPull: maybe(Num),
+  componentClass: maybe(ComponentClass)
+});
 
 //
 // DropdownButton
 //
 var DropdownButton = modelFactory('DropdownButton', {
+  pullRight: maybe(Bool),
+  dropup:    maybe(Bool),
+  title:     maybe(Renderable),
+  href:      maybe(Str),
+  onClick:   maybe(Func),
+  onSelect:  maybe(Func),
+  navItem:   maybe(Bool)
 }, [BootstrapMixin]);
 
 //
 // DropdownMenu
 //
 var DropdownMenu = modelFactory('DropdownMenu', {
-}, [BootstrapMixin]);
+  pullRight: maybe(Bool),
+  onSelect: maybe(Func)
+});
 
 //
 // Glyphicon
 //
 var Glyphicon = modelFactory('Glyphicon', {
+  glyph: Glyph
 }, [BootstrapMixin]);
 
 //
 // Grid
 //
 var Grid = modelFactory('Grid', {
-}, [BootstrapMixin]);
+  fluid: maybe(Bool),
+  componentClass: maybe(ComponentClass)
+});
 
 //
 // Input
 //
+var InputStyle = enums.of('success warning error', 'InputStyle');
 var Input = modelFactory('Input', {
-}, [BootstrapMixin]);
+  type: maybe(Str),
+  label: maybe(Renderable),
+  help: maybe(Renderable),
+  addonBefore: maybe(Renderable),
+  addonAfter: maybe(Renderable),
+  bsStyle: maybe(InputStyle),
+  hasFeedback: maybe(Bool),
+  groupClassName: maybe(Str),
+  wrapperClassName: maybe(Str),
+  labelClassName: maybe(Str),
+  checked: maybe(Bool), // TODO report missing propType
+  readOnly: maybe(Bool), // TODO report missing propType
+  multiple: maybe(Bool), // TODO report missing propType
+  value: maybe(Str), // TODO report missing propType
+  defaultValue: maybe(Str) // TODO report missing propType
+});
 
 //
 // Jumbotron
@@ -24542,7 +24612,8 @@ var Label = modelFactory('Label', {
 // MenuItem
 //
 var MenuItem = modelFactory('MenuItem', {
-}, [BootstrapMixin]);
+  key: maybe(Key) // TODO: report missing propType
+});
 
 //
 // Modal
@@ -24602,10 +24673,10 @@ var Pager = modelFactory('Pager', {
 // Panel
 //
 var Panel = modelFactory('Panel', {
-  header: Any, // TODO: React.PropTypes.renderable
-  footer: Any, // TODO: React.PropTypes.renderable
+  header: Renderable,
+  footer: Renderable,
   onClick: maybe(Func),
-  key: Key
+  key: Key // TODO: report missing propType
 }, [BootstrapMixin, CollapsableMixin]);
 
 //

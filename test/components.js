@@ -41,12 +41,5 @@ var components = [
 ];
 
 components.forEach(function (name) {
-  var s = [
-  '//',
-  '// ' + name,
-  '//',
-  "var " + name + " = modelFactory('" + name + "', {",
-  '}, [BootstrapMixin]);\n'
-  ].join('\n');
-  console.log(s);
+  console.log('var %s = bs.%s;', name, name);
 });
