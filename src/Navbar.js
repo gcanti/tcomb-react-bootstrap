@@ -10,7 +10,6 @@ var Model = model.create('Navbar', {
   inverse: t.maybe(t.Bool),
   fluid: t.maybe(t.Bool),
   role: t.maybe(t.Str),
-  componentClass: t.maybe(model.ComponentClass),
   brand: t.maybe(model.Renderable),
   toggleButton: t.maybe(model.Renderable),
   onToggle: t.maybe(t.Func),

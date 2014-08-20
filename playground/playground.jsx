@@ -1,9 +1,15 @@
 /** @jsx React.DOM */
 'use strict';
 
+// TODO queue textarea input or debouce debugger
+
 var t = require('tcomb');
 var React = require('react');
 var bs = require('tcomb-react-bootstrap');
+
+//
+// import all components
+//
 
 var Accordion = bs.Accordion;
 var Affix = bs.Affix;
@@ -45,6 +51,7 @@ var TabPane = bs.TabPane;
 var Tooltip = bs.Tooltip;
 var Well = bs.Well;
 
+// if true, open the debugger when a failure occurs
 var isDebuggerEnabled = false;
 
 // override default fail behaviour of tcomb
@@ -58,25 +65,46 @@ t.options.onFail = function (message) {
 //
 // utils
 //
-function doc(name) {
+
+// return the HTML documentation of a component
+function doc(componentName) {
   var domain = {};
-  domain[name] = bs[name].Model;
+  domain[componentName] = bs[componentName].Model;
+  // tcomb-doc
   var json = TcombDoc.parse(domain).toJSON();
-  return TcombDoc.formatMarkdown(json);
+  var markdown = TcombDoc.formatMarkdown(json);
+  return marked(markdown);
 }
 
-function getErrorAlert(message, name){
+var Documentation = React.createClass({
+  render: function () {
+    return (
+      <div className="docs">
+        <p className="lead">Check out the documentation:</p>
+        <p className="text-right"><em className="text-muted"><code>maybe(Type)</code> means an optional instance of <code>Type</code></em></p>
+        <div dangerouslySetInnerHTML={{__html: doc(this.props.componentName)}} />
+      </div>
+    );
+  }
+});
+
+// display error and related documentation
+function getErrorAlert(err, componentName){
+  var isSyntaxError = !!err.lineNumber;
+  var message = err.message;
   return (
     <div>
       <Alert bsStyle="danger">
         {message}
       </Alert>
-      <p className="lead">Check out the documentation:</p>
-      <div dangerouslySetInnerHTML={{__html: marked(doc(name))}} />
+      { isSyntaxError ? "" :
+      <Documentation componentName={componentName}/>
+      }
     </div>
   );
 }
 
+// list of examples loaded into the select input
 var examples = {
   Accordion: '<Accordion>\n  <Panel header="Collapsible Group Item #1" key={1}> Anim pariatur cliche reprehenderit </Panel>\n  <Panel header="Collapsible Group Item #2" key={2}> Anim pariatur cliche reprehenderit</Panel>\n  <Panel header="Collapsible Group Item #3" key={3}>Anim pariatur cliche reprehenderit\n</Panel>\n</Accordion>',
   Alert: '<Alert bsStyle="warning">\n  <strong>Holy guacamole!</strong>\n</Alert>',
@@ -102,21 +130,24 @@ var examples = {
   Well: '<div>\n  <Well bsSize="large">Look I\'m in a large well!</Well>\n  <Well bsSize="small">Look I\'m in a small well!</Well>\n</div>'        
 };
 
+// build select options
 var options = Object.keys(examples).sort().map(function (k) {
   return <option key={k} value={k}>{k}</option>;
 });
 
 var JSX_PREAMBLE = '/** @jsx React.DOM */\n';
 
+// handler for the Modal component
 function handleHide() {
   $('.modal').remove();
 }
 
 //
-// components
+// UI components
 //
 
-function projectLink(title) {
+// returns a link to the tcomb-reactbootstrap github repo
+function tcombReactBootstrapRepo(title) {
   return <a href="https://github.com/gcanti/tcomb-react-bootstrap">{title}</a>
 }
 
@@ -128,6 +159,9 @@ var Header = React.createClass({
           <h1>Playground</h1>
         </Col>
         <Col md={6}>
+          <div className="text-right repo-link">
+            <p>Built with {tcombReactBootstrapRepo('tcomb-react-bootstrap')}</p>
+          </div>
         </Col>
       </Row>
     );
@@ -137,9 +171,18 @@ var Header = React.createClass({
 var Footer = React.createClass({
   render: function () {
     return (
-      <Row>
-        <Col md={12}>
-          <p className="text-muted">Built with {projectLink('tcomb-react-bootstrap')}</p>
+      <Row className="text-muted">
+        <Col md={1}>
+          <strong>Credits:</strong>
+          <p>Built with</p>
+        </Col>
+        <Col md={11}>
+          <ul>
+            <li>{tcombReactBootstrapRepo('tcomb-react-bootstrap')} tcomb bindings for react-bootstrap</li>
+            <li><a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> Bootstrap 3 components built with React</li>
+            <li><a href="http://facebook.github.io/react/index.html">React</a></li>
+            <li><a href="http://getbootstrap.com">Bootstrap</a></li>
+          </ul>
         </Col>
       </Row>
     );
@@ -192,7 +235,7 @@ var Main = React.createClass({
       var js = JSXTransformer.transform(code).code;
       return eval(js);
     } catch (e) {
-      return getErrorAlert(e.message, this.state.name);
+      return getErrorAlert(e, this.state.name);
     }
   },
   onExampleChange: function (evt) {
@@ -210,7 +253,7 @@ var Main = React.createClass({
   render: function () {
     var code = this.state.code;
     var component = this.eval(JSX_PREAMBLE + code);
-    var debuggerLabel = <p><strong className="text-danger">Enable debugger</strong> (remember to open up the console and enjoy)</p>;
+    var debuggerLabel = <p><strong className="text-danger">Enable debugger</strong> <span className="text-muted">(remember to open up the console)</span></p>;
     return (
       <Grid>
         <Header/>

@@ -1,3 +1,21 @@
+body {
+  color: #333;
+}
+
+blockquote {
+  background-color: #f9f9f9;
+}
+
+.repo-link { 
+  padding: 40px 0 0 0;
+}
+.repo-link p {
+  display: inline;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 20px;
+}
+
 textarea.form-control {
   font-family: Menlo, Consolas, monospace;
   font-size: 12px;
@@ -6,4 +24,16 @@ textarea.form-control {
 
 pre.jsx-preamble {
   margin-bottom: -5px;
+}
+
+.docs {
+  margin-top: 50px;
+  color: #555;
+}
+.docs p.lead {
+  border-bottom: 1px solid #eee;
+}
+.docs code {
+  background-color: inherit;
+  color: #000;
 }

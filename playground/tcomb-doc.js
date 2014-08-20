@@ -112,12 +112,12 @@ var t = require('tcomb');
 
 var format = t.format;
 
-function h1(s) {
-  return format('# %s\n\n', s);
+function h3(s) {
+  return format('#### %s\n\n', s);
 }
 
-function h2(s) {
-  return format('## %s\n\n', s);
+function strong(s) {
+  return format('**%s**', s);
 }
 
 function p(s) {
@@ -136,13 +136,13 @@ function formatMarkdown(json) {
   json.forEach(function (type) {
     var kind = type.kind;
     var name = type.name;
-    md += h1(name);
+    md += h3(name);
     switch(kind) {
       case 'struct' :
         if (type.props.length) {
           md += p('`%s` is a `struct` with the following props:', name);
           md += ul(type.props.sort().map(function (prop) {
-            return format('`%s`: `%s`', prop.name, prop.type);
+            return format('%s: `%s`', strong(prop.name), prop.type);
           }));
         } else {
           md += p('`%s` is a `struct` with no props.', name);
@@ -152,7 +152,7 @@ function formatMarkdown(json) {
         md += p('`%s` is a `maybe(%s)`', name, type.type);
         break;
       case 'subtype' :
-        md += p('`%s` is a `subtype` of `%s` such that: %s', name, type.type, type.predicate);
+        md += p('`%s` is a `subtype` of `%s`', name, type.type);
         break;
       case 'list' :
         md += p('`%s` is a `list` of `%s`', name, type.type);
@@ -160,7 +160,7 @@ function formatMarkdown(json) {
       case 'enums' :
         md += p('`%s` is an `enums` of:', name);
         md += ul(Object.keys(type.enums).sort().map(function (k) {
-          return format('`"%s"`: `%j`', k, type.enums[k]);
+          return format('"%s": `%j`', strong(k), type.enums[k]);
         }));
         break;
       case 'tuple' :

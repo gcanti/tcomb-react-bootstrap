@@ -19,7 +19,7 @@ var Model = model.create('Col', {
   smPull: t.maybe(t.Num),
   mdPull: t.maybe(t.Num),
   lgPull: t.maybe(t.Num),
-  componentClass: t.maybe(model.ComponentClass)
+  className: t.maybe(t.Str)
 });
 
 module.exports = model.bind(Model, Component);

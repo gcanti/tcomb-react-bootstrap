@@ -3,7 +3,6 @@ var constants = require('react-bootstrap/constants');
 
 var Renderable = t.Any; // TODO: better typing of React.PropTypes.renderable
 var Key = t.union([t.Str, t.Num], 'Key');
-var ComponentClass = t.subtype(t.Str, function () { return true; }, 'ComponentClass'); // TODO implement valid React component class
 var Mountable = t.Any; // TODO better typing
 var Glyph = t.enums.of(constants.GLYPHS, 'Glyph');
 var Placement = t.enums.of('top right bottom left', 'Placement');
@@ -58,7 +57,6 @@ module.exports = {
   bind: bind,
   Renderable: Renderable,
   Key: Key,
-  ComponentClass: ComponentClass,
   Mountable: Mountable,
   Glyph: Glyph,
   Placement: Placement,
