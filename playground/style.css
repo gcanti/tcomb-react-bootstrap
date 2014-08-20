@@ -1,0 +1,8 @@
+textarea {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 12px !important;
+}
+
+pre.jsx-preamble {
+  margin-bottom: -5px;
+}
