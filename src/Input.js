@@ -4,6 +4,8 @@ var Component = require('react-bootstrap/Input');
 
 var InputStyle = t.enums.of('success warning error', 'InputStyle');
 
+var InputType = t.enums.of('text password checkbox radio select textarea static', 'InputType');
+
 var Model = model.create('Input', {
   type: t.maybe(t.Str),
   label: t.maybe(model.Renderable),
@@ -19,7 +21,8 @@ var Model = model.create('Input', {
   readOnly: t.maybe(t.Bool), // TODO report missing propType
   multiple: t.maybe(t.Bool), // TODO report missing propType
   value: t.maybe(t.Str), // TODO report missing propType
-  defaultValue: t.maybe(t.Str) // TODO report missing propType
+  defaultValue: t.maybe(t.Str), // TODO report missing propType
+  type: InputType // TODO report missing propType
 });
 
 module.exports = model.bind(Model, Component);

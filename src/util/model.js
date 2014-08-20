@@ -26,11 +26,10 @@ function bind(Model, Component) {
   return function (props) {
     // if there are no attributes React send null instead of {}
     props = props || {};
-    // I can't slice arguments otherwise React sees an array and complaints with
-    // "Each child in an array should have a unique "key" prop."
-    arguments[0] = Model(props);
     // print found warnings
-    warn(Model.warnings(props));
+    //warn(Model.warnings(props));
+    // check types
+    Model(props);
     // redirect to react-bootstrap
     return Component.apply(Component, arguments);
   };

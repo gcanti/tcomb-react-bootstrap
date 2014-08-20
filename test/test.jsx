@@ -50,13 +50,6 @@ var TabPane = bs.TabPane;
 var Tooltip = bs.Tooltip;
 var Well = bs.Well;
 
-// Alert
-append(
-  <Alert bsStyle="warning">
-    <strong>Holy guacamole!</strong> Best check yo self, you re not looking too good.
-  </Alert>
-); 
-
 // Accordion
 append(
   <Accordion>
@@ -102,17 +95,11 @@ append(
 append(
   <ButtonToolbar>
     <Button>Default</Button>
-
     <Button bsStyle="primary">Primary</Button>
-
     <Button bsStyle="success">Success</Button>
-
     <Button bsStyle="info">Info</Button>
-
     <Button bsStyle="warning">Warning</Button>
-
     <Button bsStyle="danger">Danger</Button>
-
     <Button bsStyle="link">Link</Button>
   </ButtonToolbar>
 );

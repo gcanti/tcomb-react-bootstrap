@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "jsx": "jsx -w -x jsx --no-cache-dir test/src test/build",
-    "watch": "watchify index.js -o test/build/bundle.js -v -r ./index:tcomb-react-bootstrap -r react"
+    "jsx": "jsx -w -x jsx --no-cache-dir test test",
+    "watch": "watchify index.js -o build/bundle.js -v -r ./index:tcomb-react-bootstrap -r react -r tcomb"
   },
   "repository": {
     "type": "git",
