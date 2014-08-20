@@ -139,7 +139,7 @@ var JSX_PREAMBLE = '/** @jsx React.DOM */\n';
 
 // handler for the Modal component
 function handleHide() {
-  $('.modal').remove();
+  $('.modal').hide();
 }
 
 //
@@ -154,13 +154,23 @@ function tcombReactBootstrapRepo(title) {
 var Header = React.createClass({
   render: function () {
     return (
-      <Row>
+      <Row className="header">
         <Col md={6}>
-          <h1>Playground</h1>
+          <h1>.jsx Playground <span className="text-muted">&beta;</span></h1>
+          <p className="text-muted">Write your React.js components with <span className="text-success"><b>type safety</b></span>.</p>
+          <br/>
+          <p>This {tcombReactBootstrapRepo('project')} is a <b>three days hack</b> that aims to add a layer of type checking to
+          the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> with identical APIs.
+          Beware, checkings are <i>very</i> strict at the moment.
+          </p>
         </Col>
         <Col md={6}>
           <div className="text-right repo-link">
-            <p>Built with {tcombReactBootstrapRepo('tcomb-react-bootstrap')}</p>
+              <p> 
+                Built with <a href="https://github.com/gcanti/tcomb">
+                  <img className="img-circle" src="http://gcanti.github.io/resources/tcomb/logo.png"/>
+                </a>
+              </p>
           </div>
         </Col>
       </Row>
@@ -174,7 +184,6 @@ var Footer = React.createClass({
       <Row className="text-muted">
         <Col md={1}>
           <strong>Credits:</strong>
-          <p>Built with</p>
         </Col>
         <Col md={11}>
           <ul>
@@ -216,7 +225,7 @@ var Preview = React.createClass({
 var Example = React.createClass({
   render: function () {
     return (
-      <Input label="Examples" ref="example" type="select" defaultValue="Alert" onChange={this.props.onChange}>
+      <Input label="react-bootstrap examples" ref="example" type="select" defaultValue="Alert" onChange={this.props.onChange}>
         {options}
       </Input>
     );
@@ -257,10 +266,9 @@ var Main = React.createClass({
     return (
       <Grid>
         <Header/>
-        <hr/>
         <Row>
           <Col md={6}>
-            <p className="lead">Insert JSX code or choose an example</p>
+            <p className="lead">Insert code or choose an example</p>
             <Example onChange={this.onExampleChange}/>
             <Code value={code} onChange={this.onCodeChange}/>
             <Input type="checkbox" label={debuggerLabel} onChange={this.onDebuggerChange}/>

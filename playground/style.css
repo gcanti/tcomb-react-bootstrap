@@ -6,14 +6,18 @@ blockquote {
   background-color: #f9f9f9;
 }
 
+.header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.header .img-circle {
+  padding: 10px;
+  border: 1px solid #eee;
+}
+
 .repo-link { 
   padding: 40px 0 0 0;
-}
-.repo-link p {
-  display: inline;
-  border: 1px solid #eee;
-  padding: 15px;
-  border-radius: 20px;
 }
 
 textarea.form-control {

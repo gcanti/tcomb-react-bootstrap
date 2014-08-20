@@ -139,7 +139,7 @@ var JSX_PREAMBLE = '/** @jsx React.DOM */\n';
 
 // handler for the Modal component
 function handleHide() {
-  $('.modal').remove();
+  $('.modal').hide();
 }
 
 //
@@ -154,13 +154,23 @@ function tcombReactBootstrapRepo(title) {
 var Header = React.createClass({displayName: 'Header',
   render: function () {
     return (
-      Row(null, 
+      Row({className: "header"}, 
         Col({md: 6}, 
-          React.DOM.h1(null, "Playground")
+          React.DOM.h1(null, ".jsx Playground ", React.DOM.span({className: "text-muted"}, "β")), 
+          React.DOM.p({className: "text-muted"}, "Write your React.js components with ", React.DOM.span({className: "text-success"}, React.DOM.b(null, "type safety")), "."), 
+          React.DOM.br(null), 
+          React.DOM.p(null, "This ", tcombReactBootstrapRepo('project'), " is a ", React.DOM.b(null, "three days hack"), " that aims to add a layer of type checking to" + ' ' +
+          "the awesome library ", React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " with identical APIs." + ' ' +
+          "Beware, checkings are ", React.DOM.i(null, "very"), " strict at the moment."
+          )
         ), 
         Col({md: 6}, 
           React.DOM.div({className: "text-right repo-link"}, 
-            React.DOM.p(null, "Built with ", tcombReactBootstrapRepo('tcomb-react-bootstrap'))
+              React.DOM.p(null, 
+                "Built with ", React.DOM.a({href: "https://github.com/gcanti/tcomb"}, 
+                  React.DOM.img({className: "img-circle", src: "http://gcanti.github.io/resources/tcomb/logo.png"})
+                )
+              )
           )
         )
       )
@@ -173,8 +183,7 @@ var Footer = React.createClass({displayName: 'Footer',
     return (
       Row({className: "text-muted"}, 
         Col({md: 1}, 
-          React.DOM.strong(null, "Credits:"), 
-          React.DOM.p(null, "Built with")
+          React.DOM.strong(null, "Credits:")
         ), 
         Col({md: 11}, 
           React.DOM.ul(null, 
@@ -216,7 +225,7 @@ var Preview = React.createClass({displayName: 'Preview',
 var Example = React.createClass({displayName: 'Example',
   render: function () {
     return (
-      Input({label: "Examples", ref: "example", type: "select", defaultValue: "Alert", onChange: this.props.onChange}, 
+      Input({label: "react-bootstrap examples", ref: "example", type: "select", defaultValue: "Alert", onChange: this.props.onChange}, 
         options
       )
     );
@@ -257,10 +266,9 @@ var Main = React.createClass({displayName: 'Main',
     return (
       Grid(null, 
         Header(null), 
-        React.DOM.hr(null), 
         Row(null, 
           Col({md: 6}, 
-            React.DOM.p({className: "lead"}, "Insert JSX code or choose an example"), 
+            React.DOM.p({className: "lead"}, "Insert code or choose an example"), 
             Example({onChange: this.onExampleChange}), 
             Code({value: code, onChange: this.onCodeChange}), 
             Input({type: "checkbox", label: debuggerLabel, onChange: this.onDebuggerChange})
