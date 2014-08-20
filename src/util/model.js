@@ -15,24 +15,23 @@ var BsSize = t.enums(constants.SIZES, 'BsSize');
 
 function create(name, props, mixins) {
   mix(props, mixins);
-  var model = t.struct(props, name);
-  model.warnings = function (props) {
-    return warnings(name, props, this.meta.props);
-  };
-  return model;
+  return t.struct(props, name);
 }
 
 function bind(Model, Component) {
-  return function (props) {
+  var f = function (props) {
     // if there are no attributes React send null instead of {}
     props = props || {};
-    // print found warnings
-    //warn(Model.warnings(props));
-    // check types
-    Model(props);
+    // forbid undefined props
+    checkForbiddenProps(t.getName(Model), props, Model.meta.props);
+    // check types of allowed properties
+    arguments[0] = Model(props);
     // redirect to react-bootstrap
     return Component.apply(Component, arguments);
   };
+  // attach the model to the view
+  f.Model = Model;
+  return f;
 }
 
 function mix(props, mixins) {
@@ -44,29 +43,15 @@ function mix(props, mixins) {
   return props;
 }
 
-function warnings(name, actualProps, expectedProps) {
-  var warnings = [];
+function checkForbiddenProps(name, actualProps, expectedProps) {
   for (var k in actualProps) {
     if (actualProps.hasOwnProperty(k)) {
       if (!expectedProps.hasOwnProperty(k)) {
-        warnings.push(t.format('component `%s` does not handle property `%s`', name, k));
+        t.fail(t.format('component `%s` does not handle property `%s`', name, k));
       }
     }
   }
-  return warnings;
 }
-
-function noop() {}
-
-var warn = (function () {
-  var isConsoleSupported = console && console.warn;
-  if (!isConsoleSupported) { return noop; }
-  return function (warnings) {
-    warnings.forEach(function (warning) {
-      console.warn('[tcomb-react-bootstrap] Warning: %s', warning);
-    });
-  };
-})();
 
 module.exports = {
   create: create,

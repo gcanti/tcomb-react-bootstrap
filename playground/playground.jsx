@@ -58,12 +58,22 @@ t.options.onFail = function (message) {
 //
 // utils
 //
+function doc(name) {
+  var domain = {};
+  domain[name] = bs[name].Model;
+  var json = TcombDoc.parse(domain).toJSON();
+  return TcombDoc.formatMarkdown(json);
+}
 
-function getErrorAlert(message){
+function getErrorAlert(message, name){
   return (
-    <Alert bsStyle="danger">
-      {message}
-    </Alert>
+    <div>
+      <Alert bsStyle="danger">
+        {message}
+      </Alert>
+      <p className="lead">Check out the documentation:</p>
+      <div dangerouslySetInnerHTML={{__html: marked(doc(name))}} />
+    </div>
   );
 }
 
@@ -75,14 +85,14 @@ var examples = {
   ButtonGroup: '<ButtonGroup>\n  <Button>Left</Button>\n  <Button>Middle</Button>\n  <Button>Right</Button>\n</ButtonGroup>',
   ButtonToolbar: '<ButtonToolbar>\n  <Button>Default</Button>\n  <Button bsStyle="primary">Primary</Button>\n  <Button bsStyle="success">Success</Button>\n  <Button bsStyle="info">Info</Button>\n  <Button bsStyle="warning">Warning</Button>\n  <Button bsStyle="danger">Danger</Button>\n  <Button bsStyle="link">Link</Button>\n</ButtonToolbar>',
   Carousel: '<Carousel>\n  <CarouselItem>\n  <img width={900} height={500} alt="900x500" src="carousel.png"/>\n  <div className="carousel-caption">\n  <h3>First slide label</h3> <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>\n  </div>\n  </CarouselItem>\n  <CarouselItem>\n  <img width={900} height={500} alt="900x500" src="carousel.png"/>\n  <div className="carousel-caption">\n  <h3>Second slide label</h3>\n  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n  </div>\n  </CarouselItem>\n  <CarouselItem>\n  <img width={900} height={500} alt="900x500" src="carousel.png"/>\n  <div className="carousel-caption">\n  <h3>Third slide label</h3>\n  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>\n  </div>\n  </CarouselItem>\n  </Carousel>',
-  DropdownButton: '<DropdownButton bsStyle={title.toLowerCase()} title={title}> <MenuItem key="1">Action</MenuItem> <MenuItem key="2">Another action</MenuItem> <MenuItem key="3">Something else here</MenuItem> <MenuItem divider /> <MenuItem key="4">Separated link</MenuItem> </DropdownButton>',
+  DropdownButton: '<DropdownButton bsStyle="success" title="Choose">\n  <MenuItem key="1">Action</MenuItem>\n  <MenuItem key="2">Another action</MenuItem>\n  <MenuItem key="3">Something else here</MenuItem>\n  <MenuItem divider />\n  <MenuItem key="4">Separated link</MenuItem>\n</DropdownButton>',
   Glyphicon: '<div> <ButtonToolbar> <ButtonGroup> <Button><Glyphicon glyph="align-left" /></Button> <Button><Glyphicon glyph="align-center" /></Button> <Button><Glyphicon glyph="align-right" /></Button> <Button><Glyphicon glyph="align-justify" /></Button> </ButtonGroup> </ButtonToolbar> <ButtonToolbar> <ButtonGroup> <Button bsSize="large"><Glyphicon glyph="star" /> Star</Button> <Button><Glyphicon glyph="star" /> Star</Button> <Button bsSize="small"><Glyphicon glyph="star" /> Star</Button> <Button bsSize="xsmall"><Glyphicon glyph="star" /> Star</Button> </ButtonGroup> </ButtonToolbar> </div>',
   Input: '<form> <Input type="text" defaultValue="text" /> <Input type="password" defaultValue="secret" /> <Input type="checkbox" checked readOnly label="checkbox"/> <Input type="radio" checked readOnly label="radio"/> <Input type="select" defaultValue="select"> <option value="select">select</option> <option value="other">...</option> </Input> <Input type="select" multiple> <option value="select">select (multiple)</option> <option value="other">...</option> </Input> <Input type="textarea" defaultValue="textarea" /> <Input type="static" value="static" /> </form>',
   Modal: '<Modal title="Modal title" backdrop={false} animation={false} onRequestHide={handleHide}> <div className="modal-body"> One fine body... </div> <div className="modal-footer"> <Button>Close</Button> <Button bsStyle="primary">Save changes</Button> </div> </Modal>',
   Nav: '<Nav bsStyle="pills" activeKey={1}>\n  <NavItem key={1} href="/home">NavItem 1 content</NavItem>\n  <NavItem key={2} title="Item">NavItem 2 content</NavItem>\n  <NavItem key={3} disabled={true}>NavItem 3 content</NavItem>\n</Nav>',
   Navbar: '<Navbar>\n  <Nav>\n  <NavItem key={1} href="#">Link</NavItem>\n  <NavItem key={2} href="#">Link</NavItem>\n  <DropdownButton key={3} title="Dropdown">\n  <MenuItem key="1">Action</MenuItem>\n  <MenuItem key="2">Another action</MenuItem>\n  <MenuItem key="3">Something else here</MenuItem>\n  <MenuItem divider />\n  <MenuItem key="4">Separated link</MenuItem>\n  </DropdownButton>\n  </Nav>\n</Navbar>',
   Pager: '<Pager>\n  <PageItem href="#">Previous</PageItem>\n  <PageItem href="#">Next</PageItem>\n</Pager>',
-  PanelGroup: '<PanelGroup activeKey={1} onSelect={handlePanelGroupSelect.bind(this)} accordion>\n  <Panel header="Panel 1" key={1}>Panel 1 content</Panel>\n  <Panel header="Panel 2" key={2}>Panel 2 content</Panel>\n</PanelGroup>',
+  PanelGroup: '<PanelGroup activeKey={1} accordion>\n  <Panel header="Panel 1" key={1}>Panel 1 content</Panel>\n  <Panel header="Panel 2" key={2}>Panel 2 content</Panel>\n</PanelGroup>',
   Popover: '<div>\n  <Popover placement="right" positionLeft={200} positionTop={50} title="Popover right"> And here\'s some <strong>amazing</strong> content. It\'s very engaging. right? </Popover>\n</div>',
   ProgressBar: '<div>\n  <ProgressBar striped bsStyle="success" now={40} />\n  <ProgressBar striped bsStyle="info" now={20} />\n  <ProgressBar striped bsStyle="warning" now={60} />\n  <ProgressBar striped bsStyle="danger" now={80} />\n</div>',
   SplitButton: '<SplitButton bsStyle="success" title="success">\n  <MenuItem key="1">Action</MenuItem>\n  <MenuItem key="2">Another action</MenuItem>\n  <MenuItem key="3">Something else here</MenuItem>\n  <MenuItem divider />\n  <MenuItem key="4">Separated link</MenuItem>\n</SplitButton>',
@@ -100,9 +110,6 @@ var JSX_PREAMBLE = '/** @jsx React.DOM */\n';
 
 function handleHide() {
   $('.modal').remove();
-}
-
-function handlePanelGroupSelect(selectedKey) {
 }
 
 //
@@ -149,7 +156,6 @@ var Code = React.createClass({
           ref="code" 
           type="textarea" 
           value={this.props.value} 
-          rows="10" 
           onChange={this.props.onChange}/>
       </div>
     );
@@ -177,7 +183,8 @@ var Example = React.createClass({
 var Main = React.createClass({
   getInitialState: function () {
     return {
-      code: examples.Alert
+      code: examples.Alert,
+      name: 'Alert'
     };
   },
   eval: function (code) {
@@ -185,17 +192,17 @@ var Main = React.createClass({
       var js = JSXTransformer.transform(code).code;
       return eval(js);
     } catch (e) {
-      return getErrorAlert(e.message);
+      return getErrorAlert(e.message, this.state.name);
     }
   },
   onExampleChange: function (evt) {
     var value = evt.target.value;
     var code = examples[value];
-    this.setState({code: code});
+    this.setState({code: code, name: value});
   },
   onCodeChange: function (evt) {
     var code = evt.target.value;
-    this.setState({code: code});
+    this.setState({code: code, name: this.state.name});
   },
   onDebuggerChange: function (evt) {
     isDebuggerEnabled = evt.target.checked;

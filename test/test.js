@@ -50,13 +50,6 @@ var TabPane = bs.TabPane;
 var Tooltip = bs.Tooltip;
 var Well = bs.Well;
 
-// Alert
-append(
-  Alert({bsStyle: "warning"}, 
-    React.DOM.strong(null, "Holy guacamole!"), " Best check yo self, you re not looking too good."
-  )
-); 
-
 // Accordion
 append(
   Accordion(null, 
@@ -102,17 +95,11 @@ append(
 append(
   ButtonToolbar(null, 
     Button(null, "Default"), 
-
     Button({bsStyle: "primary"}, "Primary"), 
-
     Button({bsStyle: "success"}, "Success"), 
-
     Button({bsStyle: "info"}, "Info"), 
-
     Button({bsStyle: "warning"}, "Warning"), 
-
     Button({bsStyle: "danger"}, "Danger"), 
-
     Button({bsStyle: "link"}, "Link")
   )
 );

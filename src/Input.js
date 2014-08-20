@@ -1,5 +1,6 @@
 var t = require('tcomb');
 var model = require('./util/model');
+var EventableMixin = require('./util/EventableMixin');
 var Component = require('react-bootstrap/Input');
 
 var InputStyle = t.enums.of('success warning error', 'InputStyle');
@@ -22,7 +23,8 @@ var Model = model.create('Input', {
   multiple: t.maybe(t.Bool), // TODO report missing propType
   value: t.maybe(t.Str), // TODO report missing propType
   defaultValue: t.maybe(t.Str), // TODO report missing propType
-  type: InputType // TODO report missing propType
-});
+  type: InputType, // TODO report missing propType
+  ref: t.maybe(t.Str) // TODO report missing propType
+}, [EventableMixin]);
 
 module.exports = model.bind(Model, Component);
