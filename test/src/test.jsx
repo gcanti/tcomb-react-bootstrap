@@ -2,7 +2,7 @@
 'use strict';
 
 var React = require('react');
-var bs = require('tcomb-react-bootstrap').components;
+var bs = require('tcomb-react-bootstrap');
 
 function append(component) {
   var $node = $('<div></div><br/>');
@@ -50,6 +50,13 @@ var TabPane = bs.TabPane;
 var Tooltip = bs.Tooltip;
 var Well = bs.Well;
 
+// Alert
+append(
+  <Alert bsStyle="warning">
+    <strong>Holy guacamole!</strong> Best check yo self, you re not looking too good.
+  </Alert>
+); 
+
 // Accordion
 append(
   <Accordion>
@@ -94,25 +101,18 @@ append(
 // ButtonToolbar
 append(
   <ButtonToolbar>
-    {/* Standard button */}
     <Button>Default</Button>
 
-    {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
     <Button bsStyle="primary">Primary</Button>
 
-    {/* Indicates a successful or positive action */}
     <Button bsStyle="success">Success</Button>
 
-    {/* Contextual button for informational alert messages */}
     <Button bsStyle="info">Info</Button>
 
-    {/* Indicates caution should be taken with this action */}
     <Button bsStyle="warning">Warning</Button>
 
-    {/* Indicates a dangerous or potentially negative action */}
     <Button bsStyle="danger">Danger</Button>
 
-    {/* Deemphasize a button by making it look like a link while maintaining button behavior */}
     <Button bsStyle="link">Link</Button>
   </ButtonToolbar>
 );
@@ -205,13 +205,13 @@ append(
   </form>
 );
 
+/*
 // modal
 
 function handleHide() {
   this.close();
 }
 
-/*
 append(
   <Modal title="Modal title"
     backdrop={false}
