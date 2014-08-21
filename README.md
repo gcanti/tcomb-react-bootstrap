@@ -22,6 +22,10 @@ Beware, checkings are *very* strict at the moment.
       </Alert>
     ); // => fail! debugger kicks in
 
+## Playground
+
+[Play here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
+
 ## Setup
 
     npm install tcomb-react-bootstrap
