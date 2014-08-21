@@ -287,7 +287,7 @@ var Main = React.createClass({
           <Col md={12}>
             <h2>How it works</h2>
             <p>No grammars, lexers or parsers were harmed for this experiment.</p>
-            <p>Most part of this lightweight {tcombReactBootstrapRepo('library')} (around 400 total LOC) is the domain model describing the react-bootstrap components.</p>
+            <p>The most part of this lightweight {tcombReactBootstrapRepo('library')} (around 400 total LOC) is the domain model describing the react-bootstrap components.</p>
             <p><b>Example</b>: This is the definition of the <code>Alert</code> component:</p>
             <pre>
 <span className="comment">// runtime type checking</span><br/>
@@ -311,7 +311,7 @@ var Model = model.create('Alert', &#123;<br/>
 <b>module.exports = model.bind(Model, Component);</b>
             </pre>
             <h2>Yeah but I want to debug MY components too</h2>
-            <p>You could instrument you code with asserts:</p>
+            <p>For a fast solution you could instrument your code with asserts:</p>
             <pre>
 var t = require('tcomb');<br/>
 <br/>
