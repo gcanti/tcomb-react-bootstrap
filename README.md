@@ -22,3 +22,6 @@ Beware, checkings are *very* strict at the moment.
       </Alert>
     ); // => fail! debugger kicks in
 
+## Setup
+
+    npm install tcomb-react-bootstrap
