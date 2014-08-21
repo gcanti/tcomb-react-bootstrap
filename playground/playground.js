@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 'use strict';
 
-// TODO queue textarea input or debouce debugger
-
 var t = require('tcomb');
 var React = require('react');
 var bs = require('tcomb-react-bootstrap');
@@ -54,7 +52,7 @@ var Well = bs.Well;
 // if true, open the debugger when a failure occurs
 var isDebuggerEnabled = false;
 
-// override default fail behaviour of tcomb
+// override default fail behaviour of tcomb https://github.com/gcanti/tcomb
 t.options.onFail = function (message) {
   if (isDebuggerEnabled) {
     debugger;
@@ -125,7 +123,7 @@ var examples = {
   ProgressBar: '<div>\n  <ProgressBar striped bsStyle="success" now={40} />\n  <ProgressBar striped bsStyle="info" now={20} />\n  <ProgressBar striped bsStyle="warning" now={60} />\n  <ProgressBar striped bsStyle="danger" now={80} />\n</div>',
   SplitButton: '<SplitButton bsStyle="success" title="success">\n  <MenuItem key="1">Action</MenuItem>\n  <MenuItem key="2">Another action</MenuItem>\n  <MenuItem key="3">Something else here</MenuItem>\n  <MenuItem divider />\n  <MenuItem key="4">Separated link</MenuItem>\n</SplitButton>',
   TabbedArea: '<TabbedArea defaultActiveKey={2}>\n  <TabPane key={1} tab="Tab 1"><p>TabPane 1 content</p></TabPane>\n  <TabPane key={2} tab="Tab 2"><p>TabPane 2 content</p></TabPane>\n</TabbedArea>',
-  Table: '<Table striped bordered condensed hover>\n  <thead>\n  <tr>\n  <th>#</th>\n  <th>First Name</th>\n  <th>Last Name</th>\n  <th>Username</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr>\n  <td>1</td>\n  <td>Mark</td>\n  <td>Otto</td>\n  <td>@mdo</td>\n  </tr>\n  <tr>\n  <td>2</td>\n  <td>Jacob</td>\n  <td>Thornton</td>\n  <td>@fat</td>\n  </tr>\n  <tr>\n  <td>3</td>\n  <td colSpan="2">Larry the Bird</td>\n  <td>@twitter</td>\n  </tr>\n  </tbody>\n  </Table>',
+  Table: '<Table striped bordered condensed hover>\n  <thead>\n  <tr>\n  <th>#</th>\n  <th>First Name</th>\n  <th>Last Name</th>\n  <th>Username</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr>\n  <td>1</td>\n  <td>Mark</td>\n  <td>Otto</td>\n  <td>@mdo</td>\n  </tr>\n  <tr>\n  <td>2</td>\n  <td>Jacob</td>\n  <td>Thornton</td>\n  <td>@fat</td>\n  </tr>\n  <tr>\n  <td>3</td>\n  <td colSpan="2">Larry the Bird</td>\n  <td>@twitter</td>\n  </tr>\n  </tbody>\n</Table>',
   Tooltip: '<div>\n  <Tooltip placement="right" positionLeft={150} positionTop={50}><strong>Holy guacamole!</strong> Check this info. </Tooltip>\n</div>',
   Well: '<div>\n  <Well bsSize="large">Look I\'m in a large well!</Well>\n  <Well bsSize="small">Look I\'m in a small well!</Well>\n</div>'        
 };
@@ -157,17 +155,18 @@ var Header = React.createClass({displayName: 'Header',
       Row({className: "header"}, 
         Col({md: 6}, 
           React.DOM.h1(null, ".jsx Playground ", React.DOM.span({className: "text-muted"}, "β")), 
-          React.DOM.p({className: "text-muted"}, "Write your React.js components with ", React.DOM.span({className: "text-success"}, React.DOM.b(null, "type safety")), "."), 
+          React.DOM.p({className: "text-muted"}, "Write your React.js components with safety and easy debugging"), 
           React.DOM.br(null), 
-          React.DOM.p(null, "This ", tcombReactBootstrapRepo('project'), " is a ", React.DOM.b(null, "three days hack"), " that aims to add a layer of type checking to" + ' ' +
-          "the awesome library ", React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " with identical APIs." + ' ' +
+          React.DOM.p(null, "This ", tcombReactBootstrapRepo('project'), " is a three days hack aiming to add a type checking layer to" + ' ' +
+          "the awesome library ", React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " mantaining identical APIs." + ' ' +
+          "You can opt-in in development and opt-out in production with just a ", React.DOM.code(null, "require"), "." + ' ' +
           "Beware, checkings are ", React.DOM.i(null, "very"), " strict at the moment."
           )
         ), 
         Col({md: 6}, 
           React.DOM.div({className: "text-right repo-link"}, 
               React.DOM.p(null, 
-                "Built with ", React.DOM.a({href: "https://github.com/gcanti/tcomb"}, 
+                React.DOM.a({href: "https://github.com/gcanti/tcomb"}, 
                   React.DOM.img({className: "img-circle", src: "http://gcanti.github.io/resources/tcomb/logo.png"})
                 )
               )
@@ -187,10 +186,12 @@ var Footer = React.createClass({displayName: 'Footer',
         ), 
         Col({md: 11}, 
           React.DOM.ul(null, 
-            React.DOM.li(null, tcombReactBootstrapRepo('tcomb-react-bootstrap'), " tcomb bindings for react-bootstrap"), 
-            React.DOM.li(null, React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " Bootstrap 3 components built with React"), 
-            React.DOM.li(null, React.DOM.a({href: "http://facebook.github.io/react/index.html"}, "React")), 
-            React.DOM.li(null, React.DOM.a({href: "http://getbootstrap.com"}, "Bootstrap"))
+            React.DOM.li(null, tcombReactBootstrapRepo('tcomb-react-bootstrap'), " ", React.DOM.i(null, "\"tcomb bindings for react-bootstrap\"")), 
+            React.DOM.li(null, React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " ", React.DOM.i(null, "\"Bootstrap 3 components built with React\"")), 
+            React.DOM.li(null, React.DOM.a({href: "http://facebook.github.io/react/index.html"}, "React.js")), 
+            React.DOM.li(null, React.DOM.a({href: "http://getbootstrap.com"}, "Bootstrap")), 
+            React.DOM.li(null, React.DOM.a({href: "https://github.com/gcanti/tcomb"}, "tcomb"), " ", React.DOM.i(null, "\"Pragmatic runtime type checking for JavaScript \"")), 
+            React.DOM.li(null, React.DOM.a({href: "https://github.com/gcanti/tcomb-doc"}, "tcomb-doc"), " ", React.DOM.i(null, "\"Documentation tool for tcomb\""))
           )
         )
       )
@@ -202,7 +203,7 @@ var Code = React.createClass({displayName: 'Code',
   render: function () {
     return (
       React.DOM.div(null, 
-        React.DOM.label(null, "Code (Live reload)"), 
+        React.DOM.label(null, ".jsx code (live reload)"), 
         React.DOM.pre({className: "jsx-preamble"}, JSX_PREAMBLE), 
         Input({
           ref: "code", 
@@ -276,6 +277,12 @@ var Main = React.createClass({displayName: 'Main',
           Col({md: 6}, 
             React.DOM.p({className: "lead"}, "Preview"), 
             Preview({component: component})
+          )
+        ), 
+        Row(null, 
+          Col({md: 12}, 
+            React.DOM.h2(null, "How it works"), 
+            React.DOM.p(null, "No grammars, lexers and parsers were harmed for this experiment.")
           )
         ), 
         React.DOM.hr(null), 

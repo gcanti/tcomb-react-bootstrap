@@ -2,10 +2,6 @@ body {
   color: #333;
 }
 
-blockquote {
-  background-color: #f9f9f9;
-}
-
 .header {
   border-bottom: 1px solid #eee;
   padding-bottom: 20px;
@@ -38,6 +34,7 @@ pre.jsx-preamble {
   border-bottom: 1px solid #eee;
 }
 .docs code {
+  padding: 0;
   background-color: inherit;
   color: #000;
 }

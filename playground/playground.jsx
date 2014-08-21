@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 'use strict';
 
-// TODO queue textarea input or debouce debugger
-
 var t = require('tcomb');
 var React = require('react');
 var bs = require('tcomb-react-bootstrap');
@@ -54,7 +52,7 @@ var Well = bs.Well;
 // if true, open the debugger when a failure occurs
 var isDebuggerEnabled = false;
 
-// override default fail behaviour of tcomb
+// override default fail behaviour of tcomb https://github.com/gcanti/tcomb
 t.options.onFail = function (message) {
   if (isDebuggerEnabled) {
     debugger;
@@ -125,7 +123,7 @@ var examples = {
   ProgressBar: '<div>\n  <ProgressBar striped bsStyle="success" now={40} />\n  <ProgressBar striped bsStyle="info" now={20} />\n  <ProgressBar striped bsStyle="warning" now={60} />\n  <ProgressBar striped bsStyle="danger" now={80} />\n</div>',
   SplitButton: '<SplitButton bsStyle="success" title="success">\n  <MenuItem key="1">Action</MenuItem>\n  <MenuItem key="2">Another action</MenuItem>\n  <MenuItem key="3">Something else here</MenuItem>\n  <MenuItem divider />\n  <MenuItem key="4">Separated link</MenuItem>\n</SplitButton>',
   TabbedArea: '<TabbedArea defaultActiveKey={2}>\n  <TabPane key={1} tab="Tab 1"><p>TabPane 1 content</p></TabPane>\n  <TabPane key={2} tab="Tab 2"><p>TabPane 2 content</p></TabPane>\n</TabbedArea>',
-  Table: '<Table striped bordered condensed hover>\n  <thead>\n  <tr>\n  <th>#</th>\n  <th>First Name</th>\n  <th>Last Name</th>\n  <th>Username</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr>\n  <td>1</td>\n  <td>Mark</td>\n  <td>Otto</td>\n  <td>@mdo</td>\n  </tr>\n  <tr>\n  <td>2</td>\n  <td>Jacob</td>\n  <td>Thornton</td>\n  <td>@fat</td>\n  </tr>\n  <tr>\n  <td>3</td>\n  <td colSpan="2">Larry the Bird</td>\n  <td>@twitter</td>\n  </tr>\n  </tbody>\n  </Table>',
+  Table: '<Table striped bordered condensed hover>\n  <thead>\n  <tr>\n  <th>#</th>\n  <th>First Name</th>\n  <th>Last Name</th>\n  <th>Username</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr>\n  <td>1</td>\n  <td>Mark</td>\n  <td>Otto</td>\n  <td>@mdo</td>\n  </tr>\n  <tr>\n  <td>2</td>\n  <td>Jacob</td>\n  <td>Thornton</td>\n  <td>@fat</td>\n  </tr>\n  <tr>\n  <td>3</td>\n  <td colSpan="2">Larry the Bird</td>\n  <td>@twitter</td>\n  </tr>\n  </tbody>\n</Table>',
   Tooltip: '<div>\n  <Tooltip placement="right" positionLeft={150} positionTop={50}><strong>Holy guacamole!</strong> Check this info. </Tooltip>\n</div>',
   Well: '<div>\n  <Well bsSize="large">Look I\'m in a large well!</Well>\n  <Well bsSize="small">Look I\'m in a small well!</Well>\n</div>'        
 };
@@ -157,17 +155,18 @@ var Header = React.createClass({
       <Row className="header">
         <Col md={6}>
           <h1>.jsx Playground <span className="text-muted">&beta;</span></h1>
-          <p className="text-muted">Write your React.js components with <span className="text-success"><b>type safety</b></span>.</p>
+          <p className="text-muted">Write your React.js components with safety and easy debugging</p>
           <br/>
-          <p>This {tcombReactBootstrapRepo('project')} is a <b>three days hack</b> that aims to add a layer of type checking to
-          the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> with identical APIs.
+          <p>This {tcombReactBootstrapRepo('project')} is a three days hack aiming to add a type checking layer to
+          the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> mantaining identical APIs.
+          You can opt-in in development and opt-out in production with just a <code>require</code>.
           Beware, checkings are <i>very</i> strict at the moment.
           </p>
         </Col>
         <Col md={6}>
           <div className="text-right repo-link">
               <p> 
-                Built with <a href="https://github.com/gcanti/tcomb">
+                <a href="https://github.com/gcanti/tcomb">
                   <img className="img-circle" src="http://gcanti.github.io/resources/tcomb/logo.png"/>
                 </a>
               </p>
@@ -187,10 +186,12 @@ var Footer = React.createClass({
         </Col>
         <Col md={11}>
           <ul>
-            <li>{tcombReactBootstrapRepo('tcomb-react-bootstrap')} tcomb bindings for react-bootstrap</li>
-            <li><a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> Bootstrap 3 components built with React</li>
-            <li><a href="http://facebook.github.io/react/index.html">React</a></li>
+            <li>{tcombReactBootstrapRepo('tcomb-react-bootstrap')} <i>"tcomb bindings for react-bootstrap"</i></li>
+            <li><a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> <i>"Bootstrap 3 components built with React"</i></li>
+            <li><a href="http://facebook.github.io/react/index.html">React.js</a></li>
             <li><a href="http://getbootstrap.com">Bootstrap</a></li>
+            <li><a href="https://github.com/gcanti/tcomb">tcomb</a> <i>"Pragmatic runtime type checking for JavaScript "</i></li>
+            <li><a href="https://github.com/gcanti/tcomb-doc">tcomb-doc</a> <i>"Documentation tool for tcomb"</i></li>
           </ul>
         </Col>
       </Row>
@@ -202,7 +203,7 @@ var Code = React.createClass({
   render: function () {
     return (
       <div>
-        <label>Code (Live reload)</label>
+        <label>.jsx code (live reload)</label>
         <pre className="jsx-preamble">{JSX_PREAMBLE}</pre>
         <Input
           ref="code" 
@@ -276,6 +277,12 @@ var Main = React.createClass({
           <Col md={6}>
             <p className="lead">Preview</p>
             <Preview component={component}/>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <h2>How it works</h2>
+            <p>No grammars, lexers and parsers were harmed for this experiment.</p>
           </Col>
         </Row>
         <hr/>

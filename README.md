@@ -1,12 +1,14 @@
 # tcomb-react-bootstrap
 
-This library is an attempt to add type safety to the awesome project [React Bootstrap](http://react-bootstrap.github.io).
+This project aims to add a type checking layer to
+the awesome library [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap) mantaining identical APIs.
+You can opt-in in development and opt-out in production with just a `require`.
+Beware, checkings are *very* strict at the moment.
 
 ## Example
 
     /** @jsx React.DOM */
-    var components = require('tcomb-react-bootstrap').components;
-    var Alert = components.Alert;
+    var Alert = require('tcomb-react-bootstrap/Alert');
 
     var good = (
       <Alert bsStyle="warning">
