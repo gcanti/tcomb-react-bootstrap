@@ -159,7 +159,7 @@ var Header = React.createClass({displayName: 'Header',
           React.DOM.br(null), 
           React.DOM.p(null, "This ", tcombReactBootstrapRepo('library'), " is a three days hack aiming to add a type checking layer to" + ' ' +
           "the awesome library ", React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " mantaining identical APIs." + ' ' +
-          "You can opt-in in development and opt-out in production with just a ", React.DOM.code(null, "require"), "." + ' ' +
+          "You can opt-in during the development and opt-out in production with just a ", React.DOM.code(null, "require"), "." + ' ' +
           "Beware, checkings are ", React.DOM.i(null, "very"), " strict at the moment."
           )
         ), 

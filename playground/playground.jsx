@@ -159,7 +159,7 @@ var Header = React.createClass({
           <br/>
           <p>This {tcombReactBootstrapRepo('library')} is a three days hack aiming to add a type checking layer to
           the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> mantaining identical APIs.
-          You can opt-in in development and opt-out in production with just a <code>require</code>.
+          You can opt-in during the development and opt-out in production with just a <code>require</code>.
           Beware, checkings are <i>very</i> strict at the moment.
           </p>
         </Col>
