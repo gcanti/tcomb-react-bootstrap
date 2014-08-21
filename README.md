@@ -24,7 +24,7 @@ Try the debugging support [here](https://gcanti.github.io/resources/tcomb-react-
 
 ## Yeah but I want to debug MY components too
 
-For a fast solution you could instrument your code with asserts:
+For a quick solution you could instrument your code with asserts:
 
     var t = require('tcomb');
 

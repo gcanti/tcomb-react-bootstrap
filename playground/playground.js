@@ -157,11 +157,11 @@ var Header = React.createClass({displayName: 'Header',
           React.DOM.h1(null, ".jsx Playground ", React.DOM.span({className: "text-muted"}, "β")), 
           React.DOM.p({className: "text-muted"}, "Write your React.js components with safety and easy debugging"), 
           React.DOM.br(null), 
-          React.DOM.p(null, "This ", tcombReactBootstrapRepo('library'), " is a three days hack aiming to add a type checking layer to" + ' ' +
+          React.DOM.p(null, "This playground is a three days hack aiming to add a type checking layer to" + ' ' +
           "the awesome library ", React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " mantaining identical APIs." + ' ' +
           "You opt-in during the prototyping (full debugging support) and then you opt-out in production with just one",  
           React.DOM.code(null, "require"), " change." + ' ' +
-          "Beware, checkings are ", React.DOM.i(null, "very"), " strict at the moment."
+          "Beware, checkings are ", React.DOM.i(null, "very"), " strict at the moment. ", React.DOM.b(null, "If you like it, please give me a star on ", tcombReactBootstrapRepo('GitHub'))
           )
         ), 
         Col({md: 6}, 
@@ -311,7 +311,7 @@ React.DOM.span({className: "comment"}, "// here is the heavy lifting:", React.DO
 React.DOM.b(null, "module.exports = model.bind(Model, Component);")
             ), 
             React.DOM.h2(null, "Yeah but I want to debug MY components too"), 
-            React.DOM.p(null, "For a fast solution you could instrument your code with asserts:"), 
+            React.DOM.p(null, "For a quick solution you could instrument your code with asserts:"), 
             React.DOM.pre(null, 
 "var t = require('tcomb');", React.DOM.br(null), 
 React.DOM.br(null), 
@@ -320,7 +320,7 @@ React.DOM.br(null),
   "  render: function() {", React.DOM.br(null), 
     React.DOM.b(null, "    t.assert(t.Str.is(this.props.name), \"ouch! bad name\");"), React.DOM.br(null), 
     "    return (", React.DOM.br(null), 
-      "      <h1>Hello ", this.props.name, "</h1>", React.DOM.br(null), 
+      "      <h1>Hello {this.props.name}</h1>", React.DOM.br(null), 
     "    );", React.DOM.br(null), 
   "  }", React.DOM.br(null), 
 "});", React.DOM.br(null)

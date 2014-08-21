@@ -157,11 +157,11 @@ var Header = React.createClass({
           <h1>.jsx Playground <span className="text-muted">&beta;</span></h1>
           <p className="text-muted">Write your React.js components with safety and easy debugging</p>
           <br/>
-          <p>This {tcombReactBootstrapRepo('library')} is a three days hack aiming to add a type checking layer to
+          <p>This playground is a three days hack aiming to add a type checking layer to
           the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> mantaining identical APIs.
           You opt-in during the prototyping (full debugging support) and then you opt-out in production with just one 
           <code>require</code> change.
-          Beware, checkings are <i>very</i> strict at the moment.
+          Beware, checkings are <i>very</i> strict at the moment. <b>If you like it, please give me a star on {tcombReactBootstrapRepo('GitHub')}</b>
           </p>
         </Col>
         <Col md={6}>
@@ -311,7 +311,7 @@ var Model = model.create('Alert', &#123;<br/>
 <b>module.exports = model.bind(Model, Component);</b>
             </pre>
             <h2>Yeah but I want to debug MY components too</h2>
-            <p>For a fast solution you could instrument your code with asserts:</p>
+            <p>For a quick solution you could instrument your code with asserts:</p>
             <pre>
 var t = require('tcomb');<br/>
 <br/>
@@ -320,7 +320,7 @@ var MyComponent = React.createClass(&#123;<br/>
   &nbsp;&nbsp;render: function() &#123;<br/>
     <b>&nbsp;&nbsp;&nbsp;&nbsp;t.assert(t.Str.is(this.props.name), "ouch! bad name");</b><br/>
     &nbsp;&nbsp;&nbsp;&nbsp;return (<br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello {this.props.name}&lt;/h1&gt;<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello &#123;this.props.name&#125;&lt;/h1&gt;<br/>
     &nbsp;&nbsp;&nbsp;&nbsp;);<br/>
   &nbsp;&nbsp;}<br/>
 &#125;);<br/>
