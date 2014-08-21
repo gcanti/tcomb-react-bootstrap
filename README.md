@@ -1,9 +1,5 @@
-# tcomb-react-bootstrap
-
-This project aims to add a type checking layer to
-the awesome library [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap) mantaining identical APIs.
-You can opt-in during the development and opt-out in production with just a `require`.
-Beware, checkings are *very* strict at the moment.
+This project aims to add a type checking layer to the awesome library [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap) mantaining identical APIs. You opt-in during the prototyping (full debugging support) and then 
+you opt-out in production with just one `require` change.
 
 ## Example
 
@@ -24,7 +20,7 @@ Beware, checkings are *very* strict at the moment.
 
 ## Playground
 
-[Play here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
+Try the debugging support [here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
 
 ## Setup
 
