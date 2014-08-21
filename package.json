@@ -1,7 +1,7 @@
 {
   "name": "tcomb-react-bootstrap",
-  "version": "0.0.1",
-  "description": "tcomb bindings for rest-bootstrap",
+  "version": "0.0.2",
+  "description": "tcomb bindings for react-bootstrap",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,11 +17,13 @@
     "url": "https://github.com/gcanti/tcomb-react-bootstrap/issues"
   },
   "homepage": "https://github.com/gcanti/tcomb-react-bootstrap",
-  "devDependencies": {
+  "dependencies": {
     "react-bootstrap": "*",
-    "react-tools": "*",
+    "react": "*",
+    "tcomb": "*"
+  },
+  "devDependencies": {
     "reactify": "~0.4.0",
-    "tcomb": "*",
     "watchify": "~0.4.1"
   },
   "browserify": {
