@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "jsx": "jsx -w -x jsx --no-cache-dir playground playground",
     "watch": "watchify index.js -o build/bundle.js -v -r ./index:tcomb-react-bootstrap -r react -r tcomb"
   },
   "repository": {

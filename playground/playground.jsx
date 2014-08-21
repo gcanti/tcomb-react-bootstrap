@@ -159,7 +159,8 @@ var Header = React.createClass({
           <br/>
           <p>This {tcombReactBootstrapRepo('library')} is a three days hack aiming to add a type checking layer to
           the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> mantaining identical APIs.
-          You can opt-in during the development and opt-out in production with just a <code>require</code>.
+          You opt-in during the prototyping (full debugging support) and then you opt-out in production with just one 
+          <code>require</code> change.
           Beware, checkings are <i>very</i> strict at the moment.
           </p>
         </Col>
@@ -189,7 +190,7 @@ var Footer = React.createClass({
         </Col>
         <Col md={11}>
           <ul>
-            <li>{tcombReactBootstrapRepo('tcomb-react-bootstrap')} <i>"tcomb bindings for react-bootstrap"</i></li>
+            <li>{tcombReactBootstrapRepo('tcomb-react-bootstrap')} <i>"Fast prototyping: Bootstrap + React.js + debugging support"</i></li>
             <li><a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> <i>"Bootstrap 3 components built with React"</i></li>
             <li><a href="http://facebook.github.io/react/index.html">React.js</a></li>
             <li><a href="http://getbootstrap.com">Bootstrap</a></li>
@@ -285,7 +286,7 @@ var Main = React.createClass({
         <Row>
           <Col md={12}>
             <h2>How it works</h2>
-            <p>No grammars, lexers and parsers were harmed for this experiment.</p>
+            <p>No grammars, lexers or parsers were harmed for this experiment.</p>
             <p>Most part of this lightweight {tcombReactBootstrapRepo('library')} (around 400 total LOC) is the domain model describing the react-bootstrap components.</p>
             <p><b>Example</b>: This is the definition of the <code>Alert</code> component:</p>
             <pre>
@@ -306,7 +307,7 @@ var Model = model.create('Alert', &#123;<br/>
 <br/>
 <span className="comment">// here is the heavy lifting:<br/>
 // model.bind returns a function with the same signature of the react-bootstrap component.<br/>
-// This new function checks the props types and then delegate the rendering to the react-bootstrap component</span><br/>
+// This new function checks the props types and then delegates the rendering to the react-bootstrap component</span><br/>
 <b>module.exports = model.bind(Model, Component);</b>
             </pre>
           </Col>
