@@ -1,3 +1,8 @@
+//     tcomb-react-bootstrap 0.0.1
+//     https://github.com/gcanti/tcomb-react-bootstrap
+//     (c) 2014 Giulio Canti <giulio.canti@gmail.com>
+//     tcomb-react-bootstrap may be freely distributed under the MIT license.
+
 module.exports = {
   Accordion: require('./src/Accordion'),
   Affix: require('./src/Affix'),
