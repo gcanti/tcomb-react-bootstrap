@@ -38,3 +38,7 @@ pre.jsx-preamble {
   background-color: inherit;
   color: #000;
 }
+
+.comment {
+  color: #999;
+}

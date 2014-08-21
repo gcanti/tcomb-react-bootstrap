@@ -25,7 +25,7 @@ function bind(Model, Component) {
     checkForbiddenProps(t.getName(Model), props, Model.meta.props);
     // check types of allowed properties
     arguments[0] = Model(props);
-    // redirect to react-bootstrap
+    // dispatch to react-bootstrap component
     return Component.apply(Component, arguments);
   };
   // attach the model to the view

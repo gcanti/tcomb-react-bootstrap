@@ -157,7 +157,7 @@ var Header = React.createClass({
           <h1>.jsx Playground <span className="text-muted">&beta;</span></h1>
           <p className="text-muted">Write your React.js components with safety and easy debugging</p>
           <br/>
-          <p>This {tcombReactBootstrapRepo('project')} is a three days hack aiming to add a type checking layer to
+          <p>This {tcombReactBootstrapRepo('library')} is a three days hack aiming to add a type checking layer to
           the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> mantaining identical APIs.
           You can opt-in in development and opt-out in production with just a <code>require</code>.
           Beware, checkings are <i>very</i> strict at the moment.
@@ -167,9 +167,12 @@ var Header = React.createClass({
           <div className="text-right repo-link">
               <p> 
                 <a href="https://github.com/gcanti/tcomb">
-                  <img className="img-circle" src="http://gcanti.github.io/resources/tcomb/logo.png"/>
+                  <img className="img-circle" src="https://gcanti.github.io/resources/tcomb/logo.png"/>
                 </a>
               </p>
+              <br/>
+              <br/>
+              <p>My <a href="https://gcanti.github.io">blog</a></p>
           </div>
         </Col>
       </Row>
@@ -283,6 +286,29 @@ var Main = React.createClass({
           <Col md={12}>
             <h2>How it works</h2>
             <p>No grammars, lexers and parsers were harmed for this experiment.</p>
+            <p>Most part of this lightweight {tcombReactBootstrapRepo('library')} (around 400 total LOC) is the domain model describing the react-bootstrap components.</p>
+            <p><b>Example</b>: This is the definition of the <code>Alert</code> component:</p>
+            <pre>
+<span className="comment">// runtime type checking</span><br/>
+var t = require('tcomb');<br/><br/>
+<span className="comment">// utils</span><br/>
+var model = require('./util/model');<br/>
+var BootstrapMixin = require('./util/BootstrapMixin');<br/><br/>
+<span className="comment">// react-boostrap component</span><br/>
+var Component = require('react-bootstrap/Alert');<br/>
+<br/>
+<span className="comment">// model definition</span><br/>
+var Model = model.create('Alert', &#123;<br/>
+  &nbsp;&nbsp;<b>onDismiss: t.maybe(t.Func),</b> &nbsp;<span className="comment">// means an optional function</span><br/>
+  &nbsp;&nbsp;<b>dismissAfter: t.maybe(t.Num)</b> <span className="comment">// means an optional number</span><br/>
+&#125;, [BootstrapMixin]); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="comment">// BootstrapMixin contains the definitions of bsClass, bsStyle, bsSize props</span><br/>
+<br/>
+<br/>
+<span className="comment">// here is the heavy lifting:<br/>
+// model.bind returns a function with the same signature of the react-bootstrap component.<br/>
+// This new function checks the props types and then delegate the rendering to the react-bootstrap component</span><br/>
+<b>module.exports = model.bind(Model, Component);</b>
+            </pre>
           </Col>
         </Row>
         <hr/>

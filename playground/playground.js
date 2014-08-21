@@ -157,7 +157,7 @@ var Header = React.createClass({displayName: 'Header',
           React.DOM.h1(null, ".jsx Playground ", React.DOM.span({className: "text-muted"}, "β")), 
           React.DOM.p({className: "text-muted"}, "Write your React.js components with safety and easy debugging"), 
           React.DOM.br(null), 
-          React.DOM.p(null, "This ", tcombReactBootstrapRepo('project'), " is a three days hack aiming to add a type checking layer to" + ' ' +
+          React.DOM.p(null, "This ", tcombReactBootstrapRepo('library'), " is a three days hack aiming to add a type checking layer to" + ' ' +
           "the awesome library ", React.DOM.a({href: "https://github.com/react-bootstrap/react-bootstrap"}, "react-bootstrap"), " mantaining identical APIs." + ' ' +
           "You can opt-in in development and opt-out in production with just a ", React.DOM.code(null, "require"), "." + ' ' +
           "Beware, checkings are ", React.DOM.i(null, "very"), " strict at the moment."
@@ -167,9 +167,12 @@ var Header = React.createClass({displayName: 'Header',
           React.DOM.div({className: "text-right repo-link"}, 
               React.DOM.p(null, 
                 React.DOM.a({href: "https://github.com/gcanti/tcomb"}, 
-                  React.DOM.img({className: "img-circle", src: "http://gcanti.github.io/resources/tcomb/logo.png"})
+                  React.DOM.img({className: "img-circle", src: "https://gcanti.github.io/resources/tcomb/logo.png"})
                 )
-              )
+              ), 
+              React.DOM.br(null), 
+              React.DOM.br(null), 
+              React.DOM.p(null, "My ", React.DOM.a({href: "https://gcanti.github.io"}, "blog"))
           )
         )
       )
@@ -282,7 +285,30 @@ var Main = React.createClass({displayName: 'Main',
         Row(null, 
           Col({md: 12}, 
             React.DOM.h2(null, "How it works"), 
-            React.DOM.p(null, "No grammars, lexers and parsers were harmed for this experiment.")
+            React.DOM.p(null, "No grammars, lexers and parsers were harmed for this experiment."), 
+            React.DOM.p(null, "Most part of this lightweight ", tcombReactBootstrapRepo('library'), " (around 400 total LOC) is the domain model describing the react-bootstrap components."), 
+            React.DOM.p(null, React.DOM.b(null, "Example"), ": This is the definition of the ", React.DOM.code(null, "Alert"), " component:"), 
+            React.DOM.pre(null, 
+React.DOM.span({className: "comment"}, "// runtime type checking"), React.DOM.br(null), 
+"var t = require('tcomb');", React.DOM.br(null), React.DOM.br(null), 
+React.DOM.span({className: "comment"}, "// utils"), React.DOM.br(null), 
+"var model = require('./util/model');", React.DOM.br(null), 
+"var BootstrapMixin = require('./util/BootstrapMixin');", React.DOM.br(null), React.DOM.br(null), 
+React.DOM.span({className: "comment"}, "// react-boostrap component"), React.DOM.br(null), 
+"var Component = require('react-bootstrap/Alert');", React.DOM.br(null), 
+React.DOM.br(null), 
+React.DOM.span({className: "comment"}, "// model definition"), React.DOM.br(null), 
+"var Model = model.create('Alert', {", React.DOM.br(null), 
+  "  ", React.DOM.b(null, "onDismiss: t.maybe(t.Func),"), "  ", React.DOM.span({className: "comment"}, "// means an optional function"), React.DOM.br(null), 
+  "  ", React.DOM.b(null, "dismissAfter: t.maybe(t.Num)"), " ", React.DOM.span({className: "comment"}, "// means an optional number"), React.DOM.br(null), 
+"}, [BootstrapMixin]);          ", React.DOM.span({className: "comment"}, "// BootstrapMixin contains the definitions of bsClass, bsStyle, bsSize props"), React.DOM.br(null), 
+React.DOM.br(null), 
+React.DOM.br(null), 
+React.DOM.span({className: "comment"}, "// here is the heavy lifting:", React.DOM.br(null), 
+"// model.bind returns a function with the same signature of the react-bootstrap component.", React.DOM.br(null), 
+"// This new function checks the props types and then delegate the rendering to the react-bootstrap component"), React.DOM.br(null), 
+React.DOM.b(null, "module.exports = model.bind(Model, Component);")
+            )
           )
         ), 
         React.DOM.hr(null), 
