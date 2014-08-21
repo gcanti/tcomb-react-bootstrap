@@ -22,6 +22,22 @@ you opt-out in production with just one `require` change.
 
 Try the debugging support [here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
 
+## Yeah but I want to debug MY components too
+
+You could instrument you code with asserts:
+
+    var t = require('tcomb');
+
+    /** @jsx React.DOM */
+    var MyComponent = React.createClass({
+      t.assert(t.Str.is(this.props.name), "ouch! bad name");
+      render: function() {
+        return (
+          <h1>Hello {this.props.name}</h1>
+        );
+      }
+    });
+
 ## Setup
 
     npm install tcomb-react-bootstrap
