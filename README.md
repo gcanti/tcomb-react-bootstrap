@@ -30,8 +30,8 @@ You could instrument you code with asserts:
 
     /** @jsx React.DOM */
     var MyComponent = React.createClass({
-      t.assert(t.Str.is(this.props.name), "ouch! bad name");
       render: function() {
+        t.assert(t.Str.is(this.props.name), "ouch! bad name");
         return (
           <h1>Hello {this.props.name}</h1>
         );
