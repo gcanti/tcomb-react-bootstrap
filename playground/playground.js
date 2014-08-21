@@ -309,6 +309,21 @@ React.DOM.span({className: "comment"}, "// here is the heavy lifting:", React.DO
 "// model.bind returns a function with the same signature of the react-bootstrap component.", React.DOM.br(null), 
 "// This new function checks the props types and then delegates the rendering to the react-bootstrap component"), React.DOM.br(null), 
 React.DOM.b(null, "module.exports = model.bind(Model, Component);")
+            ), 
+            React.DOM.h2(null, "Yeah but I want to debug MY components too"), 
+            React.DOM.p(null, "You could instrument you code with asserts:"), 
+            React.DOM.pre(null, 
+"var t = require('tcomb');", React.DOM.br(null), 
+React.DOM.br(null), 
+"/** @jsx React.DOM */", React.DOM.br(null), 
+"var MyComponent = React.createClass({", React.DOM.br(null), 
+  "  render: function() {", React.DOM.br(null), 
+    React.DOM.b(null, "    t.assert(t.Str.is(this.props.name), \"ouch! bad name\");"), React.DOM.br(null), 
+    "    return (", React.DOM.br(null), 
+      "      <h1>Hello ", this.props.name, "</h1>", React.DOM.br(null), 
+    "    );", React.DOM.br(null), 
+  "  }", React.DOM.br(null), 
+"});", React.DOM.br(null)
             )
           )
         ), 

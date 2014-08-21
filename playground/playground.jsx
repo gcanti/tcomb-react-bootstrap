@@ -310,6 +310,21 @@ var Model = model.create('Alert', &#123;<br/>
 // This new function checks the props types and then delegates the rendering to the react-bootstrap component</span><br/>
 <b>module.exports = model.bind(Model, Component);</b>
             </pre>
+            <h2>Yeah but I want to debug MY components too</h2>
+            <p>You could instrument you code with asserts:</p>
+            <pre>
+var t = require('tcomb');<br/>
+<br/>
+/** @jsx React.DOM */<br/>
+var MyComponent = React.createClass(&#123;<br/>
+  &nbsp;&nbsp;render: function() &#123;<br/>
+    <b>&nbsp;&nbsp;&nbsp;&nbsp;t.assert(t.Str.is(this.props.name), "ouch! bad name");</b><br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;return (<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello {this.props.name}&lt;/h1&gt;<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;);<br/>
+  &nbsp;&nbsp;}<br/>
+&#125;);<br/>
+            </pre>
           </Col>
         </Row>
         <hr/>
