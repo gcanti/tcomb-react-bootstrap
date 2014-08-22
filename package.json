@@ -1,12 +1,12 @@
 {
   "name": "tcomb-react-bootstrap",
-  "version": "0.0.2",
-  "description": "tcomb bindings for react-bootstrap",
+  "version": "0.0.3",
+  "description": "Fast prototyping: Bootstrap + React.js + debugging support",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "jsx": "jsx -w -x jsx --no-cache-dir playground playground",
-    "watch": "watchify index.js -o build/bundle.js -v -r ./index:tcomb-react-bootstrap -r react -r tcomb"
+    "test": "mocha",
+    "build-playground": "jsx -w -x jsx --no-cache-dir playground playground",
+    "build": "watchify index.js -o build/tcomb-react-bootstrap.js -v -r ./index:tcomb-react-bootstrap -r react -r tcomb"
   },
   "repository": {
     "type": "git",
