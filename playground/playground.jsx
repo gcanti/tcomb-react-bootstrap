@@ -154,25 +154,16 @@ var Header = React.createClass({
     return (
       <Row className="header">
         <Col md={6}>
-          <h1>.jsx Playground <span className="text-muted">&beta;</span></h1>
-          <p className="text-muted">Write your React.js components with safety and easy debugging</p>
+          <h1>Components Playground</h1>
+          <p className="text-muted">Fast prototyping: Bootstrap + React.js + debugging support</p>
           <br/>
-          <p>This playground is a three days hack aiming to add a type checking layer to
-          the awesome library <a href="https://github.com/react-bootstrap/react-bootstrap">react-bootstrap</a> mantaining identical APIs.
-          You opt-in during the prototyping (full debugging support) and then you opt-out in production with just one 
-          <code>require</code> change.
-          Beware, checkings are <i>very</i> strict at the moment. <b>If you like it, please give me a star on {tcombReactBootstrapRepo('GitHub')}</b>
+          <p>This {tcombReactBootstrapRepo('project')} adds a type checking layer to
+          the components of react-bootstrap. When a error occurs, say a bad value for an attribute,
+          the debugger kicks in so you can inspect the stack and quickly find out what&apos;s wrong.
           </p>
         </Col>
         <Col md={6}>
           <div className="text-right repo-link">
-              <p> 
-                <a href="https://github.com/gcanti/tcomb">
-                  <img className="img-circle" src="https://gcanti.github.io/resources/tcomb/logo.png"/>
-                </a>
-              </p>
-              <br/>
-              <br/>
               <p>My <a href="https://gcanti.github.io">blog</a></p>
           </div>
         </Col>
@@ -207,7 +198,6 @@ var Code = React.createClass({
   render: function () {
     return (
       <div>
-        <label>.jsx code (live reload)</label>
         <pre className="jsx-preamble">{JSX_PREAMBLE}</pre>
         <Input
           ref="code" 
@@ -230,7 +220,7 @@ var Preview = React.createClass({
 var Example = React.createClass({
   render: function () {
     return (
-      <Input label="react-bootstrap examples" ref="example" type="select" defaultValue="Alert" onChange={this.props.onChange}>
+      <Input ref="example" type="select" defaultValue="Alert" onChange={this.props.onChange}>
         {options}
       </Input>
     );
@@ -273,8 +263,9 @@ var Main = React.createClass({
         <Header/>
         <Row>
           <Col md={6}>
-            <p className="lead">Insert code or choose an example</p>
+            <p className="lead">Choose an example</p>
             <Example onChange={this.onExampleChange}/>
+            <p><b>Tweak the code</b>: try to change the <code>bsStyle</code> attribute</p>
             <Code value={code} onChange={this.onCodeChange}/>
             <Input type="checkbox" label={debuggerLabel} onChange={this.onDebuggerChange}/>
           </Col>
@@ -285,33 +276,8 @@ var Main = React.createClass({
         </Row>
         <Row>
           <Col md={12}>
-            <h2>How it works</h2>
-            <p>No grammars, lexers or parsers were harmed for this experiment.</p>
-            <p>The most part of this lightweight {tcombReactBootstrapRepo('library')} (around 400 total LOC) is the domain model describing the react-bootstrap components.</p>
-            <p><b>Example</b>: This is the definition of the <code>Alert</code> component:</p>
-            <pre>
-<span className="comment">// runtime type checking</span><br/>
-var t = require('tcomb');<br/><br/>
-<span className="comment">// utils</span><br/>
-var model = require('./util/model');<br/>
-var BootstrapMixin = require('./util/BootstrapMixin');<br/><br/>
-<span className="comment">// react-boostrap component</span><br/>
-var Component = require('react-bootstrap/Alert');<br/>
-<br/>
-<span className="comment">// model definition</span><br/>
-var Model = model.create('Alert', &#123;<br/>
-  &nbsp;&nbsp;<b>onDismiss: t.maybe(t.Func),</b> &nbsp;<span className="comment">// means an optional function</span><br/>
-  &nbsp;&nbsp;<b>dismissAfter: t.maybe(t.Num)</b> <span className="comment">// means an optional number</span><br/>
-&#125;, [BootstrapMixin]); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="comment">// BootstrapMixin contains the definitions of bsClass, bsStyle, bsSize props</span><br/>
-<br/>
-<br/>
-<span className="comment">// here is the heavy lifting:<br/>
-// model.bind returns a function with the same signature of the react-bootstrap component.<br/>
-// This new function checks the props types and then delegates the rendering to the react-bootstrap component</span><br/>
-<b>module.exports = model.bind(Model, Component);</b>
-            </pre>
-            <h2>Yeah but I want to debug MY components too</h2>
-            <p>For a quick solution you could instrument your code with asserts:</p>
+            <h2>Add debugging support to your own components</h2>
+            <p>For a quick solution you can instrument your code with asserts:</p>
             <pre>
 var t = require('tcomb');<br/>
 <br/>

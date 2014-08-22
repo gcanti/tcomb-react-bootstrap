@@ -22,7 +22,14 @@ textarea.form-control {
   height: 200px;
 }
 
+pre {
+  background-color: #fff;
+  border-width: 0;
+}
+
 pre.jsx-preamble {
+  border-width: 1px;
+  background-color: #f5f5f5;
   margin-bottom: -5px;
 }
 

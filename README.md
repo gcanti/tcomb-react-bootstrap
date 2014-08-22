@@ -1,5 +1,4 @@
-This project aims to add a type checking layer to the awesome library [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap) mantaining identical APIs. You opt-in during the prototyping (full debugging support) and then 
-you opt-out in production with just one `require` change.
+This project adds a type checking layer to the components of [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap). 
 
 ## Example
 
@@ -22,7 +21,7 @@ you opt-out in production with just one `require` change.
 
 Try the debugging support [here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
 
-## Yeah but I want to debug MY components too
+## Add debugging support to your own components
 
 For a quick solution you could instrument your code with asserts:
 
