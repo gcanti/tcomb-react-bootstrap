@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/Button');
 
 var Model = model.create('Button', {
+  children: model.Children,
   active: t.maybe(t.Bool),
   disabled: t.maybe(t.Bool),
   block: t.maybe(t.Bool),

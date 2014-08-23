@@ -3,6 +3,7 @@ var model = require('./util/model');
 var Component = require('react-bootstrap/Col');
 
 var Model = model.create('Col', {
+  children: model.Children,
   xs: t.maybe(t.Num),
   sm: t.maybe(t.Num),
   md: t.maybe(t.Num),

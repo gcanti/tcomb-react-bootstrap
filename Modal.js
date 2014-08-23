@@ -6,6 +6,7 @@ var Component = require('react-bootstrap/Modal');
 var Backdrop = t.union([t.enums.of('static'), t.Bool], 'Backdrop');
 
 var Model = model.create('Modal', {
+  children: model.Children,
   title: t.maybe(model.Renderable),
   backdrop: t.maybe(Backdrop),
   keyboard: t.maybe(t.Bool),

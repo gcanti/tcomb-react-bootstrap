@@ -3,6 +3,7 @@ var model = require('./util/model');
 var Component = require('react-bootstrap/MenuItem');
 
 var Model = model.create('MenuItem', {
+  children: model.Children,
   header:   t.maybe(t.Bool),
   divider:  t.maybe(t.Bool),
   href:     t.maybe(t.Str),

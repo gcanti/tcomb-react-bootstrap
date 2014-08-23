@@ -5,6 +5,7 @@ var CollapsableMixin = require('./util/CollapsableMixin');
 var Component = require('react-bootstrap/Panel');
 
 var Model = model.create('Panel', {
+  children: model.Children,
   header: t.maybe(model.Renderable),
   footer: t.maybe(model.Renderable),
   onClick: t.maybe(t.Func),

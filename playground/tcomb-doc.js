@@ -142,7 +142,7 @@ function formatMarkdown(json) {
         if (type.props.length) {
           md += p('`%s` is a `struct` with the following props:', name);
           md += ul(type.props.sort().map(function (prop) {
-            return format('%s: `%s`', strong(prop.name), prop.type);
+            return format('`%s`: `%s`', prop.name, prop.type);
           }));
         } else {
           md += p('`%s` is a `struct` with no props.', name);
@@ -160,7 +160,7 @@ function formatMarkdown(json) {
       case 'enums' :
         md += p('`%s` is an `enums` of:', name);
         md += ul(Object.keys(type.enums).sort().map(function (k) {
-          return format('"%s": `%j`', strong(k), type.enums[k]);
+          return format('`"%s"`: `%j`', k, type.enums[k]);
         }));
         break;
       case 'tuple' :

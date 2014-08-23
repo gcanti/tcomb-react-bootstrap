@@ -9,6 +9,7 @@ var TriggerC = t.list(TriggerB);
 var Trigger = t.union([TriggerA, TriggerC]);
 
 var Model = model.create('OverlayTrigger', {
+  children: model.Children,
   container: t.maybe(model.Mountable),
   trigger: t.maybe(Trigger),
   placement: t.maybe(model.Placement),

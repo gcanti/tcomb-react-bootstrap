@@ -112,7 +112,7 @@ var examples = {
   ButtonToolbar: '<ButtonToolbar>\n  <Button>Default</Button>\n  <Button bsStyle="primary">Primary</Button>\n  <Button bsStyle="success">Success</Button>\n  <Button bsStyle="info">Info</Button>\n  <Button bsStyle="warning">Warning</Button>\n  <Button bsStyle="danger">Danger</Button>\n  <Button bsStyle="link">Link</Button>\n</ButtonToolbar>',
   Carousel: '<Carousel>\n  <CarouselItem>\n  <img width={900} height={500} alt="900x500" src="carousel.png"/>\n  <div className="carousel-caption">\n  <h3>First slide label</h3> <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>\n  </div>\n  </CarouselItem>\n  <CarouselItem>\n  <img width={900} height={500} alt="900x500" src="carousel.png"/>\n  <div className="carousel-caption">\n  <h3>Second slide label</h3>\n  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n  </div>\n  </CarouselItem>\n  <CarouselItem>\n  <img width={900} height={500} alt="900x500" src="carousel.png"/>\n  <div className="carousel-caption">\n  <h3>Third slide label</h3>\n  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>\n  </div>\n  </CarouselItem>\n  </Carousel>',
   DropdownButton: '<DropdownButton bsStyle="success" title="Choose">\n  <MenuItem key="1">Action</MenuItem>\n  <MenuItem key="2">Another action</MenuItem>\n  <MenuItem key="3">Something else here</MenuItem>\n  <MenuItem divider />\n  <MenuItem key="4">Separated link</MenuItem>\n</DropdownButton>',
-  Glyphicon: '<div> <ButtonToolbar> <ButtonGroup> <Button><Glyphicon glyph="align-left" /></Button> <Button><Glyphicon glyph="align-center" /></Button> <Button><Glyphicon glyph="align-right" /></Button> <Button><Glyphicon glyph="align-justify" /></Button> </ButtonGroup> </ButtonToolbar> <ButtonToolbar> <ButtonGroup> <Button bsSize="large"><Glyphicon glyph="star" /> Star</Button> <Button><Glyphicon glyph="star" /> Star</Button> <Button bsSize="small"><Glyphicon glyph="star" /> Star</Button> <Button bsSize="xsmall"><Glyphicon glyph="star" /> Star</Button> </ButtonGroup> </ButtonToolbar> </div>',
+  Glyphicon: '<div>\n  <ButtonToolbar>\n  <ButtonGroup>\n  <Button><Glyphicon glyph="align-left" /></Button>\n  <Button><Glyphicon glyph="align-center" /></Button>\n  <Button><Glyphicon glyph="align-right" /></Button>\n  <Button><Glyphicon glyph="align-justify" /></Button>\n  </ButtonGroup>\n  </ButtonToolbar>\n  <ButtonToolbar>\n  <ButtonGroup>\n  <Button bsSize="large"><Glyphicon glyph="star" /> Star</Button>\n  <Button><Glyphicon glyph="star" /> Star</Button>\n  <Button bsSize="small"><Glyphicon glyph="star" /> Star</Button>\n  <Button bsSize="xsmall"><Glyphicon glyph="star" /> Star</Button>\n  </ButtonGroup>\n  </ButtonToolbar>\n  </div>',
   Input: '<form> <Input type="text" defaultValue="text" /> <Input type="password" defaultValue="secret" /> <Input type="checkbox" checked readOnly label="checkbox"/> <Input type="radio" checked readOnly label="radio"/> <Input type="select" defaultValue="select"> <option value="select">select</option> <option value="other">...</option> </Input> <Input type="select" multiple> <option value="select">select (multiple)</option> <option value="other">...</option> </Input> <Input type="textarea" defaultValue="textarea" /> <Input type="static" value="static" /> </form>',
   Modal: '<Modal title="Modal title" backdrop={false} animation={false} onRequestHide={handleHide}> <div className="modal-body"> One fine body... </div> <div className="modal-footer"> <Button>Close</Button> <Button bsStyle="primary">Save changes</Button> </div> </Modal>',
   Nav: '<Nav bsStyle="pills" activeKey={1}>\n  <NavItem key={1} href="/home">NavItem 1 content</NavItem>\n  <NavItem key={2} title="Item">NavItem 2 content</NavItem>\n  <NavItem key={3} disabled={true}>NavItem 3 content</NavItem>\n</Nav>',
@@ -217,10 +217,12 @@ var Preview = React.createClass({displayName: 'Preview',
   }
 });
 
+var defaultComponent = 'Alert';
+
 var Example = React.createClass({displayName: 'Example',
   render: function () {
     return (
-      Input({ref: "example", type: "select", defaultValue: "Alert", onChange: this.props.onChange}, 
+      Input({ref: "example", type: "select", defaultValue: defaultComponent, onChange: this.props.onChange}, 
         options
       )
     );
@@ -230,8 +232,8 @@ var Example = React.createClass({displayName: 'Example',
 var Main = React.createClass({displayName: 'Main',
   getInitialState: function () {
     return {
-      code: examples.Alert,
-      name: 'Alert'
+      code: examples[defaultComponent],
+      name: defaultComponent
     };
   },
   eval: function (code) {

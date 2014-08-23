@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/DropdownButton');
 
 var Model = model.create('DropdownButton', {
+  children: model.Children,
   pullRight: t.maybe(t.Bool),
   dropup: t.maybe(t.Bool),
   title: t.maybe(model.Renderable),

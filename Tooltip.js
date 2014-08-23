@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/Tooltip');
 
 var Model = model.create('Tooltip', {
+  children: model.Children,
   placement: t.maybe(model.Placement),
   positionLeft: t.maybe(t.Num),
   positionTop: t.maybe(t.Num),

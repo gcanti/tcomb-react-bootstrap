@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/Popover');
 
 var Model = model.create('Popover', {
+  children: model.Children,
   placement: model.Placement,
   positionLeft: t.maybe(t.Num),
   positionTop: t.maybe(t.Num),

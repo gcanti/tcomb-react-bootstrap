@@ -3,6 +3,7 @@ var model = require('./util/model');
 var Component = require('react-bootstrap/DropdownMenu');
 
 var Model = model.create('DropdownMenu', {
+  children: model.Children,
   pullRight: t.maybe(t.Bool),
   onSelect: t.maybe(t.Func)
 });

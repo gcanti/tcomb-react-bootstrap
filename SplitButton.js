@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/SplitButton');
 
 var Model = model.create('SplitButton', {
+  children: model.Children,
   pullRight:     t.maybe(t.Bool),
   title:         t.maybe(model.Renderable),
   href:          t.maybe(t.Str),

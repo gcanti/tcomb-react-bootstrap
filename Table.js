@@ -3,6 +3,7 @@ var model = require('./util/model');
 var Component = require('react-bootstrap/Table');
 
 var Model = model.create('Table', {
+  children: model.Children,
   striped: t.maybe(t.Bool),
   bordered: t.maybe(t.Bool),
   condensed: t.maybe(t.Bool),

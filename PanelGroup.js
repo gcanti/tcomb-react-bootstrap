@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/PanelGroup');
 
 var Model = model.create('PanelGroup', {
+  children: model.Children,
   collapsable: t.maybe(t.Bool),
   activeKey: t.Any,
   defaultActiveKey: t.Any,

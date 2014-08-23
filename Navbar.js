@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/Navbar');
 
 var Model = model.create('Navbar', {
+  children: model.Children,
   fixedTop: t.maybe(t.Bool),
   fixedBottom: t.maybe(t.Bool),
   staticTop: t.maybe(t.Bool),

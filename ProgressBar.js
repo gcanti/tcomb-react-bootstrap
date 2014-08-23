@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/ProgressBar');
 
 var Model = model.create('ProgressBar', {
+  children: model.Children,
   min: t.maybe(t.Num),
   now: t.maybe(t.Num),
   max: t.maybe(t.Num),

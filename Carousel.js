@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/Carousel');
 
 var Model = model.create('Carousel', {
+  children: model.Children,
   slide: t.maybe(t.Bool),
   indicators: t.maybe(t.Bool),
   controls: t.maybe(t.Bool),

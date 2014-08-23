@@ -3,6 +3,7 @@ var model = require('./util/model');
 var Component = require('react-bootstrap/Nav');
 
 var Model = model.create('Nav', {
+  children: model.Children,
   bsClass: t.maybe(model.BsClass),
   bsStyle: t.maybe(model.NavStyle), // TODO: report duplicate propType in BootstrapMixin
   bsSize: t.maybe(model.BsSize),

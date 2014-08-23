@@ -8,6 +8,7 @@ var InputStyle = t.enums.of('success warning error', 'InputStyle');
 var InputType = t.enums.of('text password checkbox radio select textarea static', 'InputType');
 
 var Model = model.create('Input', {
+  children: model.Children,
   type: t.maybe(t.Str),
   label: t.maybe(model.Renderable),
   help: t.maybe(model.Renderable),

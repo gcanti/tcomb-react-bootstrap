@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/SubNav');
 
 var Model = model.create('SubNav', {
+  children: model.Children,
   onSelect: t.maybe(t.Func),
   active: t.maybe(t.Bool),
   disabled: t.maybe(t.Bool),

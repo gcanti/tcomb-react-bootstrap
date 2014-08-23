@@ -4,6 +4,7 @@ var BootstrapMixin = require('./util/BootstrapMixin');
 var Component = require('react-bootstrap/ButtonToolbar');
 
 var Model = model.create('ButtonToolbar', {
+  children:  model.Children,
 }, [BootstrapMixin]);
 
 module.exports = model.bind(Model, Component);
