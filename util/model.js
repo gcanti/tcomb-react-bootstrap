@@ -1,6 +1,11 @@
 var t = require('tcomb');
 var constants = require('react-bootstrap/constants');
 
+//
+// common types
+//
+
+var Children = t.Any;
 var Renderable = t.Any; // TODO: better typing of React.PropTypes.renderable
 var Key = t.union([t.Str, t.Num], 'Key');
 var Mountable = t.Any; // TODO better typing
@@ -12,26 +17,50 @@ var BsClass = t.enums(constants.CLASSES, 'BsClass');
 var BsStyle = t.enums(constants.STYLES, 'BsStyle');
 var BsSize = t.enums(constants.SIZES, 'BsSize');
 
+//
+// heavy lifting
+//
+
 function create(name, props, mixins) {
   mix(props, mixins);
+  // HACK: add a synthetic name needed by bind()
+  props.__name__ = t.enums.of(name, name);
   return t.struct(props, name);
 }
 
 function bind(Model, Component) {
   var f = function (props) {
+    
     // if there are no attributes React send null instead of {}
     props = props || {};
+    
+    // HACK: add syntheticName prop
+    props.__name__ = Model.meta.name;
+    
+    // HACK: add children prop
+    if (arguments.length > 1) {
+      props.children = extractProps(Array.prototype.slice.call(arguments, 1));
+    }
+    
     // forbid undefined props
     checkForbiddenProps(t.getName(Model), props, Model.meta.props);
+    
     // check types of allowed properties
     arguments[0] = Model(props);
+    
     // dispatch to react-bootstrap component
     return Component.apply(Component, arguments);
   };
+
   // attach the model to the view
   f.Model = Model;
+  
   return f;
 }
+
+//
+// utils
+//
 
 function mix(props, mixins) {
   if (mixins) {
@@ -40,6 +69,19 @@ function mix(props, mixins) {
     }, props);
   }
   return props;
+}
+
+function extractProps(x) {
+  if (t.Arr.is(x)) {
+    return x.map(extractProps);
+  } else if (t.Obj.is(x)) {
+    var props = x.props;
+    if (x.children) {
+      props.children = extractProps(x.children);
+    }
+    return props;
+  }
+  return x;
 }
 
 function checkForbiddenProps(name, actualProps, expectedProps) {
@@ -55,6 +97,7 @@ function checkForbiddenProps(name, actualProps, expectedProps) {
 module.exports = {
   create: create,
   bind: bind,
+  Children: Children,
   Renderable: Renderable,
   Key: Key,
   Mountable: Mountable,
