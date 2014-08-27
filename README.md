@@ -1,3 +1,7 @@
+% tcomb-react-bootstrap
+
+![tcomb logo](http://gcanti.github.io/resources/tcomb/logo.png)
+
 This project adds a type checking layer to the components of [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap). 
 
 ## Example
