@@ -4,6 +4,8 @@ This project adds a type checking layer to the components of [react-bootstrap](h
 
     /** @jsx React.DOM */
     var Alert = require('tcomb-react-bootstrap/Alert');
+    // when ready for deploying in production simply change this require with
+    // var Alert = require('react-bootstrap/Alert');
 
     var good = (
       <Alert bsStyle="warning">
