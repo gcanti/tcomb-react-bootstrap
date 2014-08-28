@@ -1,6 +1,6 @@
 {
   "name": "tcomb-react-bootstrap",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Fast prototyping: Bootstrap + React.js + debugging support",
   "main": "index.js",
   "scripts": {
