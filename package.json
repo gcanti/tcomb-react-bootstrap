@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "build-playground": "jsx -w -x jsx --no-cache-dir playground playground",
-    "build": "watchify index.js -o build/tcomb-react-bootstrap.js -v -r ./index:tcomb-react-bootstrap -r react -r tcomb"
+    "build-playground": "jsx -w -x jsx --no-cache-dir playground playground"
   },
   "repository": {
     "type": "git",
@@ -21,16 +20,7 @@
   "dependencies": {
     "react-bootstrap": "*",
     "react": "*",
-    "tcomb": "*"
-  },
-  "devDependencies": {
-    "reactify": "~0.4.0",
-    "watchify": "~0.4.1"
-  },
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
+    "tcomb": "~0.0.12"
   },
   "tags": [
     "react",
