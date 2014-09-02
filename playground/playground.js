@@ -70,7 +70,7 @@ function doc(componentName) {
   domain[componentName] = bs[componentName].Model;
   // tcomb-doc
   var json = TcombDoc.parse(domain).toJSON();
-  var markdown = TcombDoc.formatMarkdown(json);
+  var markdown = TcombDoc.toMarkdown(json);
   return marked(markdown);
 }
 

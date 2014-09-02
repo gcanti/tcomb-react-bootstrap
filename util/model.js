@@ -1,21 +1,31 @@
 var t = require('tcomb');
 var constants = require('react-bootstrap/constants');
 
+var enums = t.enums;
+var getName = t.util.getName;
+
 //
-// common types
+// React types
 //
 
 var Children = t.Any;
 var Renderable = t.Any; // TODO: better typing of React.PropTypes.renderable
 var Key = t.union([t.Str, t.Num], 'Key');
-var Mountable = t.Any; // TODO better typing
-var Glyph = t.enums.of(constants.GLYPHS, 'Glyph');
-var Placement = t.enums.of('top right bottom left', 'Placement');
-var NavStyle = t.enums.of('tabs pills', 'NavStyle');
-var Direction = t.enums.of('prev next', 'Direction');
-var BsClass = t.enums(constants.CLASSES, 'BsClass');
-var BsStyle = t.enums(constants.STYLES, 'BsStyle');
-var BsSize = t.enums(constants.SIZES, 'BsSize');
+
+//
+// common types
+//
+
+var Mountable = t.subtype(t.Any, function (x) {
+  return typeof x === 'object' &&  typeof x.getDOMNode === 'function' && x.nodeType === 1;
+}, 'Mountable');
+var Glyph = enums.of(constants.GLYPHS, 'Glyph');
+var Placement = enums.of('top right bottom left', 'Placement');
+var NavStyle = enums.of('tabs pills', 'NavStyle');
+var Direction = enums.of('prev next', 'Direction');
+var BsClass = enums(constants.CLASSES, 'BsClass');
+var BsStyle = enums(constants.STYLES, 'BsStyle');
+var BsSize = enums(constants.SIZES, 'BsSize');
 
 //
 // heavy lifting
@@ -24,7 +34,7 @@ var BsSize = t.enums(constants.SIZES, 'BsSize');
 function create(name, props, mixins) {
   mix(props, mixins);
   // HACK: add a synthetic name needed by bind()
-  props.__name__ = t.enums.of(name, name);
+  props.__name__ = enums.of(name, name);
   return t.struct(props, name);
 }
 
@@ -35,7 +45,7 @@ function bind(Model, Component) {
     props = props || {};
     
     // HACK: add syntheticName prop
-    props.__name__ = Model.meta.name;
+    props.__name__ = getName(Model);
     
     // HACK: add children prop
     if (arguments.length > 1) {
@@ -43,11 +53,11 @@ function bind(Model, Component) {
     }
     
     // forbid undefined props
-    checkForbiddenProps(t.getName(Model), props, Model.meta.props);
+    checkForbiddenProps(getName(Model), props, Model.meta.props);
     
     // check types of allowed properties
-    arguments[0] = Model(props);
-    
+    Model(props);
+
     // dispatch to react-bootstrap component
     return Component.apply(Component, arguments);
   };
@@ -65,7 +75,7 @@ function bind(Model, Component) {
 function mix(props, mixins) {
   if (mixins) {
     props = mixins.reduce(function (acc, x) {
-      return t.mixin(acc, x);
+      return t.util.mixin(acc, x);
     }, props);
   }
   return props;
@@ -75,11 +85,7 @@ function extractProps(x) {
   if (t.Arr.is(x)) {
     return x.map(extractProps);
   } else if (t.Obj.is(x)) {
-    var props = x.props;
-    if (x.children) {
-      props.children = extractProps(x.children);
-    }
-    return props;
+    return x.props;
   }
   return x;
 }
@@ -88,7 +94,7 @@ function checkForbiddenProps(name, actualProps, expectedProps) {
   for (var k in actualProps) {
     if (actualProps.hasOwnProperty(k)) {
       if (!expectedProps.hasOwnProperty(k)) {
-        t.fail(t.format('component `%s` does not handle property `%s`', name, k));
+        t.fail(t.util.format('component `%s` does not handle property `%s`', name, k));
       }
     }
   }

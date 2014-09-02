@@ -1,10 +1,11 @@
 {
   "name": "tcomb-react-bootstrap",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Fast prototyping: Bootstrap + React.js + debugging support",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "build": "browserify index.js -o playground/tcomb-react-bootstrap.js -r tcomb -r react -r ./index.js:tcomb-react-bootstrap",
     "build-playground": "jsx -w -x jsx --no-cache-dir playground playground"
   },
   "repository": {
@@ -20,7 +21,7 @@
   "dependencies": {
     "react-bootstrap": "*",
     "react": "*",
-    "tcomb": "~0.0.12"
+    "tcomb": "*"
   },
   "tags": [
     "react",
