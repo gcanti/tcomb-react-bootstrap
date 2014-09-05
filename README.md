@@ -10,23 +10,25 @@ Try the playground [here](https://gcanti.github.io/resources/tcomb-react-bootstr
 
 ## Example
 
-    /** @jsx React.DOM */
-    // development
-    var Alert = require('tcomb-react-bootstrap/Alert');
-    // production
-    // var Alert = require('react-bootstrap/Alert');
+```js
+/** @jsx React.DOM */
+// development
+var Alert = require('tcomb-react-bootstrap/Alert');
+// production
+// var Alert = require('react-bootstrap/Alert');
 
-    var good = (
-      <Alert bsStyle="warning">
-        <strong>Holy guacamole!</strong>
-      </Alert>
-    ); // => ok!
+var good = (
+  <Alert bsStyle="warning">
+    <strong>Holy guacamole!</strong>
+  </Alert>
+); // => ok!
 
-    var bad = (
-      <Alert bsStyle="warn"> // <-- should be "warning"
-        <strong>Holy guacamole!</strong>
-      </Alert>
-    ); // => fail! debugger kicks in
+var bad = (
+  <Alert bsStyle="warn"> // <-- should be "warning"
+    <strong>Holy guacamole!</strong>
+  </Alert>
+); // => fail! debugger kicks in
+```
 
 ## Setup
 
