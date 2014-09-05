@@ -19,9 +19,9 @@
   },
   "homepage": "https://github.com/gcanti/tcomb-react-bootstrap",
   "dependencies": {
-    "react-bootstrap": "*",
     "react": "*",
-    "tcomb": "*"
+    "react-bootstrap": "*",
+    "tcomb": "~0.2.0"
   },
   "tags": [
     "react",
