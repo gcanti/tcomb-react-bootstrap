@@ -1,10 +1,13 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var Component = require('react-bootstrap/Row');
+'use strict';
 
-var Model = model.create('Row', {
-  children: model.Children,
-  className: t.maybe(t.Str)
-});
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Row');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Type = t.struct({
+  __tag__:   t.enums.of(name, name),
+  className: t.maybe(t.Str),
+  children:  t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

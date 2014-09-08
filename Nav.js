@@ -1,20 +1,23 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var Component = require('react-bootstrap/Nav');
+'use strict';
 
-var Model = model.create('Nav', {
-  children: model.Children,
-  bsClass: t.maybe(model.BsClass),
-  bsStyle: t.maybe(model.NavStyle), // TODO: report duplicate propType in BootstrapMixin
-  bsSize: t.maybe(model.BsSize),
-  stacked: t.maybe(t.Bool),
-  justified: t.maybe(t.Bool),
-  onSelect: t.maybe(t.Func),
-  collapsable: t.maybe(t.Bool), // TODO: report duplicate propType in CollapsableMixin
-  expanded: t.maybe(t.Bool), // TODO: report duplicate propType in CollapsableMixin
-  defaultExpanded: t.maybe(t.Bool),
-  navbar: t.maybe(t.Bool),
-  activeKey: t.maybe(model.Key) // TODO: report missin propType
-});
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Nav');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var NavBsStyle = require('./util/NavBsStyle');
+
+var Type = t.struct({
+  __tag__:          t.enums.of(name, name),
+  bsStyle:          t.maybe(NavBsStyle),
+  stacked:          t.maybe(t.Bool),
+  justified:        t.maybe(t.Bool),
+  onSelect:         t.maybe(t.Func),
+  collapsable:      t.maybe(t.Bool),
+  expanded:         t.maybe(t.Bool),
+  defaultExpanded:  t.maybe(t.Bool),
+  navbar:           t.maybe(t.Bool),
+  activeKey:        t.maybe(t.react.Key),
+  children:         t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

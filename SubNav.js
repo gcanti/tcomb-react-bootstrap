@@ -1,16 +1,18 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/SubNav');
+'use strict';
 
-var Model = model.create('SubNav', {
-  children: model.Children,
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/SubNav');
+var name = t.react.getDisplayName(Factory);
+
+var Type = t.struct({
+  __tag__:  t.enums.of(name, name),
   onSelect: t.maybe(t.Func),
-  active: t.maybe(t.Bool),
+  active:   t.maybe(t.Bool),
   disabled: t.maybe(t.Bool),
-  href: t.maybe(t.Str),
-  title: t.maybe(t.Str),
-  text: t.maybe(model.Renderable)
-}, [BootstrapMixin]);
+  href:     t.maybe(t.Str),
+  title:    t.maybe(t.Str),
+  text:     t.maybe(t.react.Renderable),
+  children: t.Any
+}, name);
 
-module.exports = model.bind(Model, Component);
+module.exports = t.react.bind(Factory, Type, {strict: false});

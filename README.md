@@ -4,11 +4,11 @@
 
 This project adds a type checking layer to the components of [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap). 
 
-## Playground
+# Playground
 
 Try the playground [here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
 
-## Example
+# Example
 
 ```js
 /** @jsx React.DOM */
@@ -30,8 +30,8 @@ var bad = (
 ); // => fail! debugger kicks in
 ```
 
-## Setup
+# Setup
 
     npm install tcomb-react-bootstrap
 
-## License (MIT)
+# License (MIT)

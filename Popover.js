@@ -1,16 +1,20 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/Popover');
+'use strict';
 
-var Model = model.create('Popover', {
-  children: model.Children,
-  placement: model.Placement,
-  positionLeft: t.maybe(t.Num),
-  positionTop: t.maybe(t.Num),
-  arrowOffsetLeft: t.maybe(t.Num),
-  arrowOffsetTop: t.maybe(t.Num),
-  title: t.maybe(model.Renderable)
-}, [BootstrapMixin]);
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Popover');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Placement = require('./util/Placement');
+
+var Type = t.struct({
+  __tag__:          t.enums.of(name, name),
+  placement:        Placement,
+  positionLeft:     t.maybe(t.Num),
+  positionTop:      t.maybe(t.Num),
+  arrowOffsetLeft:  t.maybe(t.Num),
+  arrowOffsetTop:   t.maybe(t.Num),
+  title:            t.maybe(t.react.Renderable),
+  children:         t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

@@ -1,10 +1,15 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/Well');
+'use strict';
 
-var Model = model.create('Well', {
-  children: model.Children,
-}, [BootstrapMixin]);
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Well');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var BsSize = require('./util/BsSize');
+
+var Type = t.struct({
+  __tag__:      t.enums.of(name, name),
+  bsSize:       t.maybe(BsSize),
+  children:     t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

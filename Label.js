@@ -1,10 +1,13 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/Label');
+'use strict';
 
-var Model = model.create('Label', {
-  children: model.Children,
-}, [BootstrapMixin]);
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Label');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Type = t.struct({
+  __tag__:    t.enums.of(name, name),
+  className:  t.maybe(t.Str),
+  children:   t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

@@ -1,12 +1,25 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/Alert');
+'use strict';
 
-var Model = model.create('Alert', {
-  children: model.Children,
-  onDismiss: t.maybe(t.Func),
-  dismissAfter: t.maybe(t.Num)
-}, [BootstrapMixin]);
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Alert');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var BsSize = require('./util/BsSize');
+var PositiveInt = require('./util/PositiveInt');
+var BsStyle = require('./util/BsStyle');
+
+var predicate = function (x) {
+  return t.Nil.is(x.onDismiss) === t.Nil.is(x.dismissAfter);
+};
+predicate.__doc__ = 'onDismiss and dismissAfter either or neither passed';
+
+var Type = t.subtype(t.struct({
+  __tag__:      t.enums.of(name, name),
+  bsStyle:      BsStyle,
+  bsSize:       t.maybe(BsSize),
+  onDismiss:    t.maybe(t.Func),
+  dismissAfter: t.maybe(PositiveInt),
+  children:     t.Any
+}, 'UnsafeAlert'), predicate, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

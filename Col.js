@@ -1,26 +1,31 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var Component = require('react-bootstrap/Col');
+'use strict';
 
-var Model = model.create('Col', {
-  children: model.Children,
-  xs: t.maybe(t.Num),
-  sm: t.maybe(t.Num),
-  md: t.maybe(t.Num),
-  lg: t.maybe(t.Num),
-  xsOffset: t.maybe(t.Num),
-  smOffset: t.maybe(t.Num),
-  mdOffset: t.maybe(t.Num),
-  lgOffset: t.maybe(t.Num),
-  xsPush: t.maybe(t.Num),
-  smPush: t.maybe(t.Num),
-  mdPush: t.maybe(t.Num),
-  lgPush: t.maybe(t.Num),
-  xsPull: t.maybe(t.Num),
-  smPull: t.maybe(t.Num),
-  mdPull: t.maybe(t.Num),
-  lgPull: t.maybe(t.Num),
-  className: t.maybe(t.Str)
-});
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Col');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var ColInt = require('./util/ColInt');
+
+var Type = t.struct({
+  __tag__:      t.enums.of(name, name),
+  xs:         t.maybe(ColInt),
+  sm:         t.maybe(ColInt),
+  md:         t.maybe(ColInt),
+  lg:         t.maybe(ColInt),
+  xsOffset:   t.maybe(ColInt),
+  smOffset:   t.maybe(ColInt),
+  mdOffset:   t.maybe(ColInt),
+  lgOffset:   t.maybe(ColInt),
+  xsPush:     t.maybe(ColInt),
+  smPush:     t.maybe(ColInt),
+  mdPush:     t.maybe(ColInt),
+  lgPush:     t.maybe(ColInt),
+  xsPull:     t.maybe(ColInt),
+  smPull:     t.maybe(ColInt),
+  mdPull:     t.maybe(ColInt),
+  lgPull:     t.maybe(ColInt),
+  className:  t.maybe(t.Str),
+  children:   t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

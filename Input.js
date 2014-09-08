@@ -1,31 +1,34 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var EventableMixin = require('./util/EventableMixin');
-var Component = require('react-bootstrap/Input');
+'use strict';
 
-var InputStyle = t.enums.of('success warning error', 'InputStyle');
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Input');
+var name = t.react.getDisplayName(Factory);
 
+var InputBsStyle = t.enums.of('success warning error', 'InputBsStyle');
 var InputType = t.enums.of('text password checkbox radio select textarea static', 'InputType');
 
-var Model = model.create('Input', {
-  children: model.Children,
-  type: t.maybe(t.Str),
-  label: t.maybe(model.Renderable),
-  help: t.maybe(model.Renderable),
-  addonBefore: t.maybe(model.Renderable),
-  addonAfter: t.maybe(model.Renderable),
-  bsStyle: t.maybe(InputStyle),
-  hasFeedback: t.maybe(t.Bool),
+var Type = t.struct({
+  __tag__:      t.enums.of(name, name),
+  type:         InputType,
+  bsStyle:      t.maybe(InputBsStyle),
+  label:        t.maybe(t.react.Renderable),
+  help:         t.maybe(t.react.Renderable),
+  addonBefore:  t.maybe(t.react.Renderable),
+  addonAfter:   t.maybe(t.react.Renderable),
+  hasFeedback:  t.maybe(t.Bool),
   groupClassName: t.maybe(t.Str),
   wrapperClassName: t.maybe(t.Str),
   labelClassName: t.maybe(t.Str),
-  checked: t.maybe(t.Bool), // TODO report missing propType
-  readOnly: t.maybe(t.Bool), // TODO report missing propType
-  multiple: t.maybe(t.Bool), // TODO report missing propType
-  value: t.maybe(t.Str), // TODO report missing propType
-  defaultValue: t.maybe(t.Str), // TODO report missing propType
-  type: InputType, // TODO report missing propType
-  ref: t.maybe(t.Str) // TODO report missing propType
-}, [EventableMixin]);
+  checked:      t.maybe(t.Bool),
+  readOnly:     t.maybe(t.Bool),
+  multiple:     t.maybe(t.Bool),
+  value:        t.maybe(t.Str),
+  defaultValue: t.maybe(t.Str),
+  ref:          t.maybe(t.react.Ref),
+  children:     t.Any,
+  // events
+  onClick:      t.maybe(t.Func),
+  onChange:     t.maybe(t.Func)
+}, name);
 
-module.exports = model.bind(Model, Component);
+module.exports = t.react.bind(Factory, Type, {strict: false});

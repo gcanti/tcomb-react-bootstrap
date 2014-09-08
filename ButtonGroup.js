@@ -1,13 +1,16 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/ButtonGroup');
+'use strict';
+
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/ButtonGroup');
+var name = t.react.getDisplayName(Factory);
+
 var Button = require('./Button');
 
-var Model = model.create('ButtonGroup', {
-  children:  t.list(Button.Model),
-  vertical:  t.maybe(t.Bool),
-  justified: t.maybe(t.Bool)
-}, [BootstrapMixin]);
+var Type = t.struct({
+  __tag__:    t.enums.of(name, name),
+  vertical:   t.maybe(t.Bool),
+  justified:  t.maybe(t.Bool),
+  children:   t.list(Button.type, 'Buttons')
+}, name);
 
-module.exports = model.bind(Model, Component);
+module.exports = t.react.bind(Factory, Type, {strict: false});

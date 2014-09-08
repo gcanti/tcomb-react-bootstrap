@@ -1,9 +1,12 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var Component = require('react-bootstrap/PageHeader');
+'use strict';
 
-var Model = model.create('PageHeader', {
-  children: model.Children,
-});
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/PageHeader');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Type = t.struct({
+  __tag__:      t.enums.of(name, name),
+  children:     t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

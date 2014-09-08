@@ -1,16 +1,18 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/NavItem');
+'use strict';
 
-var Model = model.create('NavItem', {
-  children: model.Children,
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/NavItem');
+var name = t.react.getDisplayName(Factory);
+
+var Type = t.struct({
+  __tag__:  t.enums.of(name, name),
   onSelect: t.maybe(t.Func),
-  active: t.maybe(t.Bool),
+  active:   t.maybe(t.Bool),
   disabled: t.maybe(t.Bool),
-  href: t.maybe(t.Str),
-  title: t.maybe(t.Str),
-  key: t.maybe(model.Key)
-}, [BootstrapMixin]);
+  href:     t.maybe(t.Str),
+  title:    t.maybe(t.Str),
+  key:      t.maybe(t.react.Key),
+  children: t.Any
+}, name);
 
-module.exports = model.bind(Model, Component);
+module.exports = t.react.bind(Factory, Type, {strict: false});

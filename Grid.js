@@ -1,11 +1,14 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var Component = require('react-bootstrap/Grid');
+'use strict';
 
-var Model = model.create('Grid', {
-  children: model.Children,
-  fluid: t.maybe(t.Bool),
-  className: t.maybe(t.Str)
-});
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Grid');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Type = t.struct({
+  __tag__:    t.enums.of(name, name),
+  fluid:      t.maybe(t.Bool),
+  className:  t.maybe(t.Str),
+  children:   t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

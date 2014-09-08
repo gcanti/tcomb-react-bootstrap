@@ -1,23 +1,27 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/OverlayTrigger');
+'use strict';
 
-var TriggerA = t.enums.of('manual click hover focus', 'TriggerA'); // TODO understand what are these types
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/OverlayTrigger');
+var name = t.react.getDisplayName(Factory);
+
+var PositiveInt = require('./util/PositiveInt');
+var Placement = require('./util/Placement');
+var TriggerA = t.enums.of('manual click hover focus', 'TriggerA'); // TODO understand what exactly are these types in react-bootstrap
 var TriggerB = t.enums.of('click hover focus', 'TriggerB');
-var TriggerC = t.list(TriggerB);
-var Trigger = t.union([TriggerA, TriggerC]);
+var TriggerC = t.list(TriggerB, 'TriggerC');
+var Trigger = t.union([TriggerA, TriggerC], 'Trigger');
 
-var Model = model.create('OverlayTrigger', {
-  children: model.Children,
-  container: t.maybe(model.Mountable),
-  trigger: t.maybe(Trigger),
-  placement: t.maybe(model.Placement),
-  delay: t.maybe(t.Num),
-  delayShow: t.maybe(t.Num),
-  delayHide: t.maybe(t.Num),
-  defaultOverlayShown: t.maybe(t.Bool),
-  overlay: model.Renderable
-}, [BootstrapMixin]);
+var Type = t.struct({
+  __tag__:              t.enums.of(name, name),
+  container:            t.maybe(t.react.Mountable),
+  trigger:              t.maybe(Trigger),
+  placement:            t.maybe(Placement),
+  delay:                t.maybe(PositiveInt),
+  delayShow:            t.maybe(PositiveInt),
+  delayHide:            t.maybe(PositiveInt),
+  defaultOverlayShown:  t.maybe(t.Bool),
+  overlay:              t.react.Renderable,
+  children:             t.Any
+}, name);
 
-module.exports = model.bind(Model, Component);
+module.exports = t.react.bind(Factory, Type, {strict: false});

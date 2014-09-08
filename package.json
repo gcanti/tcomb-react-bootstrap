@@ -1,12 +1,12 @@
 {
   "name": "tcomb-react-bootstrap",
-  "version": "0.0.5",
-  "description": "Fast prototyping: Bootstrap + React.js + debugging support",
+  "version": "0.1.0",
+  "description": "Type checking for react-bootstrap",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "build": "browserify index.js -o playground/tcomb-react-bootstrap.js -r tcomb -r react -r ./index.js:tcomb-react-bootstrap",
-    "build-playground": "jsx -w -x jsx --no-cache-dir playground playground"
+    "dev": "watchify index.js -o dev/tcomb-react-bootstrap.js -r ./index.js:tcomb-react-bootstrap -r react -v",
+    "playground": "watchify -t reactify playground/playground.jsx -o playground/playground.js -r react -r tcomb -r ./index:tcomb-react-bootstrap -r tcomb-doc -v"
   },
   "repository": {
     "type": "git",
@@ -19,9 +19,12 @@
   },
   "homepage": "https://github.com/gcanti/tcomb-react-bootstrap",
   "dependencies": {
-    "react": "*",
-    "react-bootstrap": "*",
-    "tcomb": "~0.2.0"
+    "react": "~0.11.1",
+    "react-bootstrap": "~0.11.1",
+    "tcomb-react": "~0.1.0"
+  },
+  "devDependencies": {
+    "tcomb-doc": "~0.2.2"
   },
   "tags": [
     "react",

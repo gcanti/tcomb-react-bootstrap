@@ -1,17 +1,24 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/SplitButton');
+'use strict';
 
-var Model = model.create('SplitButton', {
-  children: model.Children,
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/SplitButton');
+var name = t.react.getDisplayName(Factory);
+
+var BsSize = require('./util/BsSize');
+var ButtonBsStyle = require('./util/ButtonBsStyle');
+
+var Type = t.struct({
+  __tag__:       t.enums.of(name, name),
+  bsStyle:       t.maybe(ButtonBsStyle),
+  bsSize:        t.maybe(BsSize),
   pullRight:     t.maybe(t.Bool),
-  title:         t.maybe(model.Renderable),
+  title:         t.maybe(t.react.Renderable),
   href:          t.maybe(t.Str),
-  dropdownTitle: t.maybe(model.Renderable),
+  dropdownTitle: t.maybe(t.react.Renderable),
   onClick:       t.maybe(t.Func),
   onSelect:      t.maybe(t.Func),
-  disabled:      t.maybe(t.Bool)
-}, [BootstrapMixin]);
+  disabled:      t.maybe(t.Bool),
+  children:      t.Any
+}, name);
 
-module.exports = model.bind(Model, Component);
+module.exports = t.react.bind(Factory, Type, {strict: false});

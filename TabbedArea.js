@@ -1,15 +1,19 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var Component = require('react-bootstrap/TabbedArea');
+'use strict';
 
-var Model = model.create('TabbedArea', {
-  children: model.Children,
-  bsClass: t.maybe(model.BsClass),
-  bsStyle: t.maybe(model.NavStyle), // TODO: report duplicate propType in BootstrapMixin
-  bsSize: t.maybe(model.BsSize),
-  animation: t.maybe(t.Bool),
-  onSelect: t.maybe(t.Func),
-  defaultActiveKey: t.maybe(model.Key) // TODO: report missing propType
-});
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/TabbedArea');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var NavBsStyle = require('./util/NavBsStyle');
+var TabPane = require('./TabPane');
+
+var Type = t.struct({
+  __tag__:          t.enums.of(name, name),
+  bsStyle:          t.maybe(NavBsStyle),
+  animation:        t.maybe(t.Bool),
+  onSelect:         t.maybe(t.Func),
+  defaultActiveKey: t.maybe(t.react.Key),
+  children:         t.list(TabPane.type, 'TabPanes')
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

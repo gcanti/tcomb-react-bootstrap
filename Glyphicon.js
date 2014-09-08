@@ -1,10 +1,14 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/Glyphicon');
+'use strict';
 
-var Model = model.create('Glyphicon', {
-  glyph: model.Glyph
-}, [BootstrapMixin]);
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Glyphicon');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Glyph = require('./util/Glyph');
+
+var Type = t.struct({
+  __tag__:  t.enums.of(name, name),
+  glyph:    Glyph
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

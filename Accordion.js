@@ -1,9 +1,12 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var Component = require('react-bootstrap/Accordion');
+'use strict';
 
-var Model = model.create('Accordion', {
-  children: model.Children,
-});
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/Accordion');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Type = t.struct({
+  __tag__:      t.enums.of(name, name),
+  children:     t.Any
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

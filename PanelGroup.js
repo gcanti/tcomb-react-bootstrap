@@ -1,15 +1,19 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/PanelGroup');
+'use strict';
 
-var Model = model.create('PanelGroup', {
-  children: model.Children,
-  collapsable: t.maybe(t.Bool),
-  activeKey: t.Any,
-  defaultActiveKey: t.Any,
-  onSelect: t.maybe(t.Func),
-  accordion: t.maybe(t.Bool) // TODO: report missing propType
-}, [BootstrapMixin]);
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/PanelGroup');
+var name = t.react.getDisplayName(Factory);
 
-module.exports = model.bind(Model, Component);
+var Panel = require('./Panel');
+
+var Type = t.struct({
+  __tag__:          t.enums.of(name, name),
+  collapsable:      t.maybe(t.Bool),
+  activeKey:        t.maybe(t.react.Key),
+  defaultActiveKey: t.maybe(t.react.Key),
+  onSelect:         t.maybe(t.Func),
+  accordion:        t.maybe(t.Bool),
+  children:         t.list(Panel.type, 'Panels')
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});

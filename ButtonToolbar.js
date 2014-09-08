@@ -1,10 +1,18 @@
-var t = require('tcomb');
-var model = require('./util/model');
-var BootstrapMixin = require('./util/BootstrapMixin');
-var Component = require('react-bootstrap/ButtonToolbar');
+'use strict';
 
-var Model = model.create('ButtonToolbar', {
-  children:  model.Children,
-}, [BootstrapMixin]);
+var t = require('tcomb-react');
+var Factory = require('react-bootstrap/ButtonToolbar');
 
-module.exports = model.bind(Model, Component);
+// fix react-bootstrap bug: react-bootstrap/ButtonToolbar has ButtonGroup as displayName
+Factory.type.displayName = 'ButtonToolbar';
+
+var name = t.react.getDisplayName(Factory);
+
+var ButtonGroup = require('./ButtonGroup');
+
+var Type = t.struct({
+  __tag__:    t.enums.of(name, name),
+  children:   t.list(ButtonGroup.type, 'ButtonGroups')
+}, name);
+
+module.exports = t.react.bind(Factory, Type, {strict: false});
