@@ -1,6 +1,6 @@
 {
   "name": "tcomb-react-bootstrap",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Type checking for react-bootstrap",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
   "tags": [
     "react",
     "bootstrap",
-    "tcomb"
+    "tcomb",
+    "react-component"
   ]
 }
