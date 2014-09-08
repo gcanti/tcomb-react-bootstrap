@@ -10,6 +10,16 @@ If you want to **add type checking to your own React components**, see [here](ht
 
 Try the playground [here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
 
+# Constraint examples
+
+Some constraints among others enforced by this library:
+
+- `Alert`: `onDismiss` and `dismissAfter` must either or neither passed
+- `ButtonGroup`: can have only `Button` children
+- `Col`: props must be integers between 1 and 12
+- `Glyphicon`: can't have children
+- `Nav`: bsStyle must be one of `pills`, `tabs`
+
 # Example
 
 ```js
