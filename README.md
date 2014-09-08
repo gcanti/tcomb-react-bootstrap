@@ -4,6 +4,8 @@
 
 This project adds a type checking layer to the components of [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap). 
 
+If you want to **add type checking to your own React components**, see [here](https://github.com/gcanti/tcomb-react).
+
 # Playground
 
 Try the playground [here](https://gcanti.github.io/resources/tcomb-react-bootstrap/playground/playground.html)
