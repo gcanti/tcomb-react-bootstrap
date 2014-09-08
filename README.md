@@ -20,7 +20,10 @@ Some constraints among others enforced by this library:
 - `Glyphicon`: can't have children
 - `Nav`: bsStyle must be one of `pills`, `tabs`
 
-# Example
+For now the constraints are quite relaxed in order to allow an easier demo, however they can be tighten up to the point of accepting 
+only whitelisted props.
+
+# Usage
 
 ```js
 /** @jsx React.DOM */
