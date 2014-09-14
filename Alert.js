@@ -3,15 +3,16 @@
 var t = require('tcomb-react');
 var Factory = require('react-bootstrap/Alert');
 var name = t.react.getDisplayName(Factory);
+var Nil = t.Nil;
 
 var BsSize = require('./util/BsSize');
 var PositiveInt = require('./util/PositiveInt');
 var BsStyle = require('./util/BsStyle');
 
 var predicate = function (x) {
-  return t.Nil.is(x.onDismiss) === t.Nil.is(x.dismissAfter);
+  return !( !Nil.is(x.dismissAfter) && Nil.is(x.onDismiss) );
 };
-predicate.__doc__ = 'onDismiss and dismissAfter either or neither passed';
+predicate.__doc__ = '`onDismiss` specified when `dismissAfter` is specified';
 
 var Type = t.subtype(t.struct({
   __tag__:      t.enums.of(name, name),
