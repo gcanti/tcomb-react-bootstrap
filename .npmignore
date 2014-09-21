@@ -1,5 +1,11 @@
+.*
+*.log
+bower.json
+Grunfile.js
+tcomb.sjs
 node_modules
-npm-debug.log
-playground
-dev
 test
+coverage
+dev
+playground
+examples
